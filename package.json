@@ -1,0 +1,29 @@
+{
+  "name": "vue-typer",
+  "version": "1.0.0",
+  "description": "Vue component that simulates a user typing, selecting, and deleting text.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cngu/vue-typer.git"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vue.js",
+    "component",
+    "typer",
+    "typewriter",
+    "type",
+    "auto"
+  ],
+  "author": "Chris Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cngu/vue-typer/issues"
+  },
+  "homepage": "https://github.com/cngu/vue-typer#readme"
+}
