@@ -29,6 +29,7 @@
   "homepage": "https://github.com/cngu/vue-typer#readme",
   "devDependencies": {
     "html-webpack-plugin": "^2.24.1",
-    "webpack": "^2.2.0-rc.1"
+    "webpack": "^2.1.0-beta.28",
+    "webpack-merge": "^1.1.2"
   }
 }
