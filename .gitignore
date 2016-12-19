@@ -1,0 +1,7 @@
+.DS_Store
+.vscode
+node_modules
+*.log
+
+#TODO: Remove/adjust when we publish/export the Vue component & plugin
+dist
