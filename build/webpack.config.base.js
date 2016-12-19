@@ -5,7 +5,7 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    testapp: path.join(projectRoot, 'src/main.js')
+    "vue-typer": path.join(projectRoot, 'src/main.js')
   },
   output: {
     path: path.join(projectRoot, 'dist'),
