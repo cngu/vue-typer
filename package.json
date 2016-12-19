@@ -4,7 +4,8 @@
   "description": "Vue component that simulates a user typing, selecting, and deleting text.",
   "main": "src/main.js",
   "scripts": {
-    "build": "webpack --config build/webpack.config.base.js",
+    "dev": "webpack-dev-server --config build/webpack.config.dev.js --hot --inline --open",
+    "build": "webpack --config build/webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,7 +30,10 @@
   "homepage": "https://github.com/cngu/vue-typer#readme",
   "devDependencies": {
     "html-webpack-plugin": "^2.24.1",
+    "pug": "^2.0.0-beta6",
+    "pug-loader": "^2.3.0",
     "webpack": "^2.1.0-beta.28",
+    "webpack-dev-server": "^2.2.0-rc.0",
     "webpack-merge": "^1.1.2"
   }
 }

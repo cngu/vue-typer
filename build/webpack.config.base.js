@@ -1,5 +1,4 @@
 var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var projectRoot = path.resolve(__dirname, '../')
 
@@ -11,10 +10,9 @@ module.exports = {
     path: path.join(projectRoot, 'dist'),
     filename: '[name].js'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'vue-typer demo',
-      filename: path.join(projectRoot, 'index.html')
-    })
-  ]
+  module: {
+    rules: [
+      { test: /\.pug$/, loader: 'pug-loader' }
+    ]
+  }
 }
