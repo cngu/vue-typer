@@ -13,8 +13,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'vue-typer test app',
-      filename: 'index.html'
+      title: 'vue-typer demo',
+      filename: path.join(projectRoot, 'index.html')
     })
   ]
 }
