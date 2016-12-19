@@ -29,5 +29,3 @@ TODO
 [MIT](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2016-2017 Chris Nguyen
-
-var HtmlWebpackPlugin = require('html-webpack-plugin');
