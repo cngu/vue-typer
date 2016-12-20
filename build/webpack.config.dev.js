@@ -7,6 +7,8 @@ module.exports = merge(baseWebpackConfig, {
   output: {
     publicPath: "/"
   },
+  // Ideally #eval-source-map, but breakpoints don't work: https://github.com/webpack/webpack/issues/2145
+  devtool: '#source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'vue-typer dev server',
