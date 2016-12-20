@@ -5,7 +5,7 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    "vue-typer": path.join(projectRoot, 'src/main.js')
+    'vue-typer': path.join(projectRoot, 'src/main.js')
   },
   output: {
     path: path.join(projectRoot, 'dist'),
@@ -13,15 +13,21 @@ module.exports = {
   },
   module: {
     rules: [
-      { 
-        enforce: 'pre', 
-        test: /\.(js|vue)$/, 
+      {
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        include: projectRoot,
+        exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
           formatter: require('eslint-friendly-formatter')
-        },
+        }
+      },
+      {
+        test: /\.js$/,
         include: projectRoot,
-        exclude: /node_modules/ 
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       }
     ]
   },
