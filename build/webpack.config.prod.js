@@ -7,7 +7,7 @@ var baseWebpackConfig = require('./webpack.config.base')
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    'vue-typer': pathUtil.getPathFromRoot('src/vue-typer.js'),
+    'vue-typer': pathUtil.getPathFromRoot('src/vue-typer.js')
   },
   output: {
     filename: '[name].min.js'
