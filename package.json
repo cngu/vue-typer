@@ -2,11 +2,13 @@
   "name": "vue-typer",
   "version": "1.0.0",
   "description": "Vue component that simulates a user typing, selecting, and deleting text.",
-  "main": "src/main.js",
+  "main": "dist/vue-typer.min.js",
   "scripts": {
     "dev": "NODE_ENV='development' webpack-dev-server --config build/webpack.config.dev.js --hot --inline --open --compress",
     "dev:lan": "npm run dev -- --host 0.0.0.0",
-    "build": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
+    "build": "npm run build:prod",
+    "build:demo": "NODE_ENV='production' webpack --config build/webpack.config.demo.js",
+    "build:prod": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
     "test": "NODE_ENV='testing' echo \"Error: no test specified\" && exit 1",
     "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src"
   },

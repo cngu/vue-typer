@@ -1,23 +1,16 @@
-var path = require('path')
 var webpack = require('webpack')
-
-var projectRoot = path.resolve(__dirname, '../')
+var pathUtil = require('./path-util.js')
 
 module.exports = {
-  entry: {
-    'vue-typer': path.join(projectRoot, 'src/main.js'),
-    vendor: 'vue'
-  },
   output: {
-    path: path.join(projectRoot, 'dist'),
-    filename: '[name].js'
+    path: pathUtil.getPathFromRoot('dist')
   },
   module: {
     rules: [
       {
         enforce: 'pre',
         test: /\.(js|vue)$/,
-        include: projectRoot,
+        include: pathUtil.getRoot(),
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
@@ -26,7 +19,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: projectRoot,
+        include: pathUtil.getRoot(),
         exclude: /node_modules/,
         loader: 'babel-loader'
       }
@@ -39,8 +32,6 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest']
-    })
+    new webpack.NoErrorsPlugin(),
   ]
 }
