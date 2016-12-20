@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var pathUtil = require('./path-util.js')
 var baseWebpackConfig = require('./webpack.config.base')
+var baseUglifyConfig = require('./uglify.config.base')
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
@@ -27,11 +28,7 @@ module.exports = merge(baseWebpackConfig, {
     // https://github.com/webpack/webpack/issues/1315
     // An alternative is NamedModulesPlugin, but this leaks/exposes the pathnames.
     new webpack.HashedModuleIdsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    new webpack.optimize.UglifyJsPlugin(baseUglifyConfig),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new HtmlWebpackPlugin({
       title: 'vue-typer demo',
