@@ -9,11 +9,9 @@ module.exports = merge(baseWebpackConfig, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.pug',
-      inject: 'body',
-      templateVars: {
-        title: 'vue-typer demo'
-      }
+      title: 'vue-typer dev server',
+      template: 'build/template.index.html',
+      inject: 'body'
     })
   ]
 })

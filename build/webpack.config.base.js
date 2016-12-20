@@ -9,10 +9,5 @@ module.exports = {
   output: {
     path: path.join(projectRoot, 'dist'),
     filename: '[name].js'
-  },
-  module: {
-    rules: [
-      { test: /\.pug$/, loader: 'pug-loader' }
-    ]
   }
 }
