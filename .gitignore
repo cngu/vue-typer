@@ -5,3 +5,4 @@ node_modules
 
 #TODO: Remove/adjust when we publish/export the Vue component & plugin
 dist
+index.html
