@@ -22,7 +22,11 @@ TODO
 TODO
 
 ## Changelog
-TODO 
+TODO
+
+## TODO
+* Update to stable releases of webpack and webpack-dev-server
+* Revisit community discussions around the best way to obtain deterministic hashes so I can remove HashedModuleIdsPlugin
 
 ## License
 
