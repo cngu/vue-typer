@@ -9,7 +9,8 @@
     "demo": "NODE_ENV='production' webpack --config build/webpack.config.demo.js",
     "build": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
     "test": "NODE_ENV='testing' echo \"Error: no test specified\" && exit 1",
-    "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src"
+    "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src",
+    "clean": "rimraf ./dist ./index.html"
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "html-webpack-plugin": "^2.24.1",
+    "rimraf": "^2.5.4",
     "webpack": "^2.1.0-beta.28",
     "webpack-dev-server": "^2.2.0-rc.0",
     "webpack-merge": "^1.1.2"
