@@ -47,5 +47,8 @@
     "webpack": "^2.1.0-beta.28",
     "webpack-dev-server": "^2.2.0-rc.0",
     "webpack-merge": "^1.1.2"
+  },
+  "dependencies": {
+    "vue": "^2.1.6"
   }
 }

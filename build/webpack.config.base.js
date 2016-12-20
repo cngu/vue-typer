@@ -5,7 +5,8 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    'vue-typer': path.join(projectRoot, 'src/main.js')
+    'vue-typer': path.join(projectRoot, 'src/main.js'),
+    vendor: 'vue'
   },
   output: {
     path: path.join(projectRoot, 'dist'),
@@ -37,6 +38,9 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest']
     })
   ]
 }
