@@ -4,10 +4,10 @@
   "description": "Vue component that simulates a user typing, selecting, and deleting text.",
   "main": "src/main.js",
   "scripts": {
-    "lint": "eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src",
     "dev": "NODE_ENV='development' webpack-dev-server --config build/webpack.config.dev.js --hot --inline --open",
     "build": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
-    "test": "NODE_ENV='testing' echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV='testing' echo \"Error: no test specified\" && exit 1",
+    "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src"
   },
   "repository": {
     "type": "git",
