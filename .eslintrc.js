@@ -11,6 +11,8 @@ module.exports = {
   ],
   // add your custom rules here
   'rules': {
+    // allow no-spaces between function name and argument parethesis list
+    'space-before-function-paren': 0,
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow debugger during development
