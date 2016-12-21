@@ -1,4 +1,9 @@
-console.log('This is the entry point of the vue-typer module')
+import VueTyperComponent from './components/VueTyper.vue'
+
+export const VueTyper = VueTyperComponent
 
 export default {
+  install(Vue) {
+    Vue.component('vue-typer', VueTyperComponent)
+  }
 }
