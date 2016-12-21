@@ -1,5 +1,7 @@
 var webpack = require('webpack')
 var pathUtil = require('./path-util.js')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var autoprefixer = require('autoprefixer')
 
 module.exports = {
   output: {
@@ -18,6 +20,23 @@ module.exports = {
         }
       },
       {
+        test: /\.vue$/,
+        include: pathUtil.getRoot(),
+        exclude: /node_modules/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              loader: 'css-loader',
+              fallbackLoader: 'vue-style-loader'
+            })
+          },
+          postcss: [
+            autoprefixer({ browsers: ['last 2 versions'] })
+          ]
+        }
+      },
+      {
         test: /\.js$/,
         include: pathUtil.getRoot(),
         exclude: /node_modules/,
@@ -26,12 +45,13 @@ module.exports = {
     ]
   },
   plugins: [
-    // Required for vue-loader: http://vuejs.github.io/vue-loader/en/workflow/production.html
+    // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('style.css'),
+    new webpack.NoErrorsPlugin()
   ]
 }

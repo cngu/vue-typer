@@ -37,8 +37,8 @@ module.exports = merge(baseWebpackConfig, {
       inject: 'body',
       minify: {
         removeComments: true,
-        // collapseWhitespace: true,
-        removeAttributeQuotes: true
+        collapseWhitespace: false,
+        removeAttributeQuotes: false
       },
       // Necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'

@@ -17,6 +17,8 @@ module.exports = merge(baseWebpackConfig, {
   },
   devtool: '#source-map',
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(baseUglifyConfig)
+     // http://vuejs.github.io/vue-loader/en/workflow/production.html
+    new webpack.optimize.UglifyJsPlugin(baseUglifyConfig),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 })
