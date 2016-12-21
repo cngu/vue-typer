@@ -41,6 +41,14 @@ module.exports = {
         include: pathUtil.getRoot(),
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        include: pathUtil.getRoot(),
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          loader: 'css-loader'
+        })
       }
     ]
   },
