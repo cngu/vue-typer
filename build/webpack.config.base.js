@@ -29,6 +29,9 @@ module.exports = {
             css: ExtractTextPlugin.extract({
               loader: 'css-loader',
               fallbackLoader: 'vue-style-loader'
+            }),
+            scss: ExtractTextPlugin.extract({
+              loader: ['css-loader', 'sass-loader']
             })
           },
           postcss: [

@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 .demo {
   border: 1px solid blue;
 }
