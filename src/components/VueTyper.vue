@@ -4,12 +4,12 @@ span.vue-typer
   //- of the cursor, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
   //- Until we can find a solution for this, we just create one span per character.
   span.char(v-for='l in numLeftChars') {{ currentTextArray[l-1] }}
-  span.caret(v-if='showCaret')
-    span.caret
+  caret(v-if='showCaret')
   span.char(v-for='r in numRightChars', :class='characterClassObject') {{ currentTextArray[numLeftChars + r-1] }}
 </template>
 
 <script>
+import Caret from './Caret'
 import shuffle from 'utils/shuffle'
 import { nonNegativeNumberValidator,
          stringArrayValidator } from 'utils/validators'
@@ -28,6 +28,9 @@ const ERASE_STYLE = {
 }
 
 export default {
+  components: {
+    Caret
+  },
   props: {
     /* GENERAL */
     text: {
@@ -304,28 +307,19 @@ export default {
 </script>
 
 <style lang='scss'>
-span {
-  display: inline-block;
-  white-space: pre-wrap;
-}
-
 .vue-typer {
   word-break: break-all;
 
   .char {
+    display: inline-block;
+    white-space: pre-wrap;
+
     &.delete {
       display: none;
     }
     &.select {
       background-color: #ACCEF7;
     }
-  }
-
-  .caret {
-    display: inline-block;
-    /* everything below here should be customizable thru props and bound as a style object */
-    width: 1px;
-    background-color: red;
   }
 }
 </style>
