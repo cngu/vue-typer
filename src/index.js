@@ -1,4 +1,4 @@
-import VueTyperComponent from './components/VueTyper.vue'
+import VueTyperComponent from './components/VueTyper'
 
 export const VueTyper = VueTyperComponent
 
