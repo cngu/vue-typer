@@ -7,6 +7,12 @@ module.exports = {
   output: {
     path: pathUtil.getPathFromRoot('dist')
   },
+  resolve: {
+    extensions: ['.js', '.vue'],
+    alias: {
+      utils: pathUtil.getPathFromRoot('src/utils')
+    }
+  },
   module: {
     rules: [
       {
