@@ -67,7 +67,7 @@ export default {
     },
     startTypeDelay: {
       type: Number,
-      default: 0,
+      default: 75,
       validator: nonNegativeNumberValidator
     },
     /* ERASE */
@@ -78,7 +78,7 @@ export default {
     },
     startEraseDelay: {
       type: Number,
-      default: 1750,
+      default: 2000,
       validator: nonNegativeNumberValidator
     },
     eraseStyle: {
@@ -122,6 +122,7 @@ export default {
 
       spool: [],
       spoolIndex: -1,
+      previousTextIndex: -1,
       currentTextIndex: -1,
 
       showCaret: true
@@ -129,10 +130,20 @@ export default {
   },
   computed: {
     isSelectionBasedEraseStyle() {
-      return this.eraseStyle.match(`^${ERASE_STYLE.SELECT_BACK}|${ERASE_STYLE.SELECT_ALL}$`)
+      return !!this.eraseStyle.match(`^${ERASE_STYLE.SELECT_BACK}|${ERASE_STYLE.SELECT_ALL}$`)
     },
     isEraseAllStyle() {
-      return this.eraseStyle.match(`^${ERASE_STYLE.DISAPPEAR}|${ERASE_STYLE.SELECT_ALL}$`)
+      return !!this.eraseStyle.match(`^${ERASE_STYLE.DISAPPEAR}|${ERASE_STYLE.SELECT_ALL}$`)
+    },
+    isDoneTyping() {
+      return this.currentTextIndex >= this.currentText.length
+    },
+    isDoneErasing() {
+      // Selection-based erase styles must stay in the highlight stage for one iteration before erasing is finished.
+      if (this.isSelectionBasedEraseStyle) {
+        return this.currentTextIndex <= 0 && this.previousTextIndex <= 0
+      }
+      return this.currentTextIndex <= 0
     },
     onLastWord() {
       return this.spoolIndex === this.spool.length - 1
@@ -197,7 +208,7 @@ export default {
         // This is a special case when we start off in erasing mode. The first text is already considered typed, and
         // it may even be the only text in the spool. So don't jump directly into erasing mode (in-case 'repeat' and
         // 'eraseFinalText' are configured to false), and instead jump to the "we just finished typing a word" phase.
-        this.currentTextIndex = this.currentText.length
+        this.moveCursorToEnd()
         this.onTyped()
       }
     },
@@ -216,16 +227,6 @@ export default {
           break
       }
     },
-    startDelayedRepeatingAction(action, delay, repeatInterval) {
-      if (this.actionTimeout || this.actionInterval) {
-        return
-      }
-      this.actionTimeout = setTimeout(() => {
-        this.actionInterval = setInterval(() => {
-          action()
-        }, repeatInterval)
-      }, delay)
-    },
     cancelCurrentAction() {
       if (this.actionInterval) {
         clearInterval(this.actionInterval)
@@ -236,45 +237,77 @@ export default {
         this.actionTimeout = 0
       }
     },
-    startTyping() {
-      this.currentTextIndex = 0
-      this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
-
-      this.startDelayedRepeatingAction(() => {
-        if (this.currentTextIndex < this.currentText.length) {
-          this.currentTextIndex++
-        }
-        this.showCaret = this.showCaretType
-
-        if (this.currentTextIndex >= this.currentText.length) {
-          this.cancelCurrentAction()
-          this.onTyped()
-        }
-      }, this.startTypeDelay, this.typeDelay)
+    shiftCursor(delta) {
+      this.previousTextIndex = this.currentTextIndex
+      const newCursorIndex = this.currentTextIndex + delta
+      this.currentTextIndex = Math.min(Math.max(newCursorIndex, 0), this.currentText.length)
     },
-    startErasing() {
+    moveCursorToStart() {
+      this.previousTextIndex = this.currentTextIndex
+      this.currentTextIndex = 0
+    },
+    moveCursorToEnd() {
+      this.previousTextIndex = this.currentTextIndex
       this.currentTextIndex = this.currentText.length
+    },
+    typeStep() {
+      if (!this.isDoneTyping) {
+        this.shiftCursor(1)
+      }
       this.showCaret = this.showCaretType
 
-      this.startDelayedRepeatingAction(() => {
-        const previousTextIndex = this.currentTextIndex
-        if (this.currentTextIndex > 0) {
-          if (this.isEraseAllStyle) {
-            this.currentTextIndex = 0
-          } else {
-            this.currentTextIndex--
-          }
+      if (this.isDoneTyping) {
+        this.cancelCurrentAction()
+        // Ensure the last typed character is rendered before proceeding
+        // Note that $nextTick is not required after typing the previous characters due to setInterval
+        this.$nextTick(this.onTyped)
+      }
+    },
+    eraseStep() {
+      if (!this.isDoneErasing) {
+        if (this.isEraseAllStyle) {
+          this.moveCursorToStart()
+        } else {
+          this.shiftCursor(-1)
         }
-        this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
+      }
+      this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
 
-        // Selection-based erase styles stop one iteration later because there's a highlight step before erasing happens.
-        // We use previousTextIndex for checking simply because we shouldn't decrement currentTextIndex below 0.
-        const finalPreviousTextIndex = this.isSelectionBasedEraseStyle ? 0 : 1
-        if (previousTextIndex <= finalPreviousTextIndex) {
-          this.cancelCurrentAction()
-          this.onErased()
+      if (this.isDoneErasing) {
+        this.cancelCurrentAction()
+        // Ensure every last character is 'erased' in the DOM before proceeding
+        this.$nextTick(this.onErased)
+      }
+    },
+    startTyping() {
+      if (this.actionTimeout || this.actionInterval) {
+        return
+      }
+
+      this.moveCursorToStart()
+      this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
+
+      this.actionTimeout = setTimeout(() => {
+        this.typeStep()
+        if (!this.isDoneTyping) {
+          this.actionInterval = setInterval(this.typeStep, this.typeDelay)
         }
-      }, this.startEraseDelay, this.eraseDelay)
+      }, this.startTypeDelay)
+    },
+    startErasing() {
+      if (this.actionTimeout || this.actionInterval) {
+        return
+      }
+
+      this.moveCursorToEnd()
+      this.showCaret = this.showCaretType
+
+      this.actionTimeout = setTimeout(() => {
+        this.eraseStep()
+        if (!this.isDoneErasing) {
+          this.actionInterval = setInterval(this.eraseStep, this.eraseDelay)
+        }
+      }, this.startEraseDelay)
     },
     onTyped() {
       this.$emit('typed', this.currentText)
