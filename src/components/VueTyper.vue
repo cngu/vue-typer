@@ -62,12 +62,12 @@ export default {
     /* TYPE */
     typeDelay: {
       type: Number,
-      default: 75,
+      default: 70,
       validator: nonNegativeNumberValidator
     },
     startTypeDelay: {
       type: Number,
-      default: 75,
+      default: 70,
       validator: nonNegativeNumberValidator
     },
     /* ERASE */
@@ -358,7 +358,9 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style scoped lang='scss'>
+@import 'colors';
+
 .vue-typer {
   word-break: break-all;
 
@@ -370,7 +372,7 @@ export default {
       display: none;
     }
     &.select {
-      background-color: #ACCEF7;
+      background-color: $default-selection-bg;
     }
   }
 }
