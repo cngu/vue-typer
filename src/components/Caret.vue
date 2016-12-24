@@ -6,11 +6,12 @@ span.caret
 </script>
 
 <style scoped lang='scss'>
-.caret {
+@import 'colors';
+
+span {
   display: inline-block;
-  /* TODO: everything below here should be customizable thru props and bound as a style object */
   width: 1px;
-  background-color: orange;
+  background-color: $default-caret-color;
 
   &:empty:before {
     content: '\200b'; // zero width space character
