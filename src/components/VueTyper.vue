@@ -38,7 +38,7 @@ export default {
       required: true,
       validator(value) {
         if (typeof value === 'string') {
-          return true
+          return value.length
         }
         return stringArrayValidator(value)
       }
@@ -172,14 +172,19 @@ export default {
   },
   methods: {
     init() {
-      // Process the 'text' prop into a typing spool, and shuffling the order if necessary
+      // Process the 'text' prop into a typing spool
       if (typeof this.text === 'string') {
         this.spool = [this.text]
       } else {
+        // Don't violate one-way binding, make a copy! Vue doesn't make a copy for us to keep things reactive
         let textCopy = this.text.slice()
+
+        textCopy = textCopy.filter(textToType => textToType.length)
+
         if (this.shuffle && textCopy.length > 1) {
           shuffle(textCopy)
         }
+
         this.spool = textCopy
       }
 
@@ -236,7 +241,9 @@ export default {
       this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
 
       this.startDelayedRepeatingAction(() => {
-        this.currentTextIndex++
+        if (this.currentTextIndex < this.currentText.length) {
+          this.currentTextIndex++
+        }
         this.showCaret = this.showCaretType
 
         if (this.currentTextIndex >= this.currentText.length) {
@@ -295,8 +302,8 @@ export default {
       }
     },
     onComplete() {
-      this.transitionTo(STATE.IDLE)
       this.showCaret = this.showCaretOnComplete
+      this.transitionTo(STATE.IDLE)
       this.$emit('complete')
     }
   },
