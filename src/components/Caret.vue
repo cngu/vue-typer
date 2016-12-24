@@ -17,7 +17,7 @@ span.caret
 /* Keep the following styles as low-specificity as possible so they are more easily overridden */
 span {
   display: inline-block;
-  width: 10px;
+  width: 1px;
 }
 
 .idle {
