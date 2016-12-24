@@ -172,6 +172,7 @@ export default {
   },
   methods: {
     init() {
+      // Process the 'text' prop into a typing spool, and shuffling the order if necessary
       if (typeof this.text === 'string') {
         this.spool = [this.text]
       } else {
@@ -188,6 +189,9 @@ export default {
       if (this.initialAction === STATE.TYPING) {
         this.transitionTo(STATE.TYPING)
       } else if (this.initialAction === STATE.ERASING) {
+        // This is a special case when we start off in erasing mode. The first text is already considered typed, and
+        // it may even be the only text in the spool. So don't jump directly into erasing mode (in-case 'repeat' and
+        // 'eraseFinalText' are configured to false), and instead jump to the "we just finished typing a word" phase.
         this.currentTextIndex = this.currentText.length
         this.onTyped()
       }
@@ -246,16 +250,20 @@ export default {
       this.showCaret = this.showCaretType
 
       this.startDelayedRepeatingAction(() => {
-        if (this.isEraseAllStyle && this.currentTextIndex > 0) {
-          this.currentTextIndex = 0
-        } else {
-          this.currentTextIndex--
+        const previousTextIndex = this.currentTextIndex
+        if (this.currentTextIndex > 0) {
+          if (this.isEraseAllStyle) {
+            this.currentTextIndex = 0
+          } else {
+            this.currentTextIndex--
+          }
         }
         this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
 
-        // Non-selection-based erase styles should stop one iteration earlier because there's no highlight step
-        const lastTextIndex = this.isSelectionBasedEraseStyle ? -1 : 0
-        if (this.currentTextIndex <= lastTextIndex) {
+        // Selection-based erase styles stop one iteration later because there's a highlight step before erasing happens.
+        // We use previousTextIndex for checking simply because we shouldn't decrement currentTextIndex below 0.
+        const finalPreviousTextIndex = this.isSelectionBasedEraseStyle ? 0 : 1
+        if (previousTextIndex <= finalPreviousTextIndex) {
           this.cancelCurrentAction()
           this.onErased()
         }
