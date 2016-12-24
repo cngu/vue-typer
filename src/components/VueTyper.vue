@@ -3,9 +3,9 @@ span.vue-typer
   //- Ideally we'd just use 2 spans to contain the characters to the left and right
   //- of the cursor, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
   //- Until we can find a solution for this, we just create one span per character.
-  span.char(v-for='l in numLeftChars') {{ currentTextArray[l-1] }}
-  caret(v-if='showCaret')
-  span.char(v-for='r in numRightChars', :class='characterClassObject') {{ currentTextArray[numLeftChars + r-1] }}
+  span.char.typed(v-for='l in numLeftChars') {{ currentTextArray[l-1] }}
+  caret(:class='caretClasses')
+  span.char(v-for='r in numRightChars', :class='rightCharClasses') {{ currentTextArray[numLeftChars + r-1] }}
 </template>
 
 <script>
@@ -17,7 +17,8 @@ import { nonNegativeNumberValidator,
 const STATE = {
   IDLE: 'idle',
   TYPING: 'typing',
-  ERASING: 'erasing'
+  ERASING: 'erasing',
+  COMPLETE: 'complete'
 }
 
 const ERASE_STYLE = {
@@ -88,30 +89,11 @@ export default {
     eraseFinalText: {
       type: Boolean,
       default: false
-    },
+    }
     /*
     CARET
     caretAnimation: String ('blink', 'smooth', 'phase', 'expand' and 'solid')
-    caretColor: String
-    selectionBgColor: String
-    selectionFgColor: String
     */
-    showCaretType: {
-      type: Boolean,
-      default: true
-    },
-    showCaretSelect: {
-      type: Boolean,
-      default: false
-    },
-    showCaretErase: {
-      type: Boolean,
-      default: true
-    },
-    showCaretOnComplete: {
-      type: Boolean,
-      default: false
-    }
   },
   data() {
     return {
@@ -123,12 +105,28 @@ export default {
       spool: [],
       spoolIndex: -1,
       previousTextIndex: -1,
-      currentTextIndex: -1,
-
-      showCaret: true
+      currentTextIndex: -1
     }
   },
   computed: {
+    caretClasses() {
+      return {
+        idle: this.state === STATE.IDLE,
+        typing: this.state === STATE.TYPING,
+        selecting: this.state === STATE.ERASING && this.isSelectionBasedEraseStyle,
+        erasing: this.state === STATE.ERASING && !this.isSelectionBasedEraseStyle,
+        complete: this.state === STATE.COMPLETE
+      }
+    },
+    rightCharClasses() {
+      return {
+        selected: this.state === STATE.ERASING && this.isSelectionBasedEraseStyle,
+        erased: this.state === STATE.IDLE ||
+                this.state === STATE.TYPING ||
+                this.state === STATE.COMPLETE ||
+                this.state === STATE.ERASING && !this.isSelectionBasedEraseStyle
+      }
+    },
     isSelectionBasedEraseStyle() {
       return !!this.eraseStyle.match(`^${ERASE_STYLE.SELECT_BACK}|${ERASE_STYLE.SELECT_ALL}$`)
     },
@@ -150,14 +148,6 @@ export default {
     },
     shouldRepeat() {
       return this.repeatCounter < this.repeat
-    },
-    characterClassObject() {
-      return {
-        delete: this.state === STATE.IDLE ||
-                this.state === STATE.TYPING ||
-                this.state === STATE.ERASING && !this.isSelectionBasedEraseStyle,
-        select: this.state === STATE.ERASING && this.isSelectionBasedEraseStyle
-      }
     },
     currentText() {
       if (this.spoolIndex >= 0 && this.spoolIndex < this.spool.length) {
@@ -203,7 +193,7 @@ export default {
       this.repeatCounter = 0
 
       if (this.initialAction === STATE.TYPING) {
-        this.transitionTo(STATE.TYPING)
+        this.startTyping()
       } else if (this.initialAction === STATE.ERASING) {
         // This is a special case when we start off in erasing mode. The first text is already considered typed, and
         // it may even be the only text in the spool. So don't jump directly into erasing mode (in-case 'repeat' and
@@ -215,17 +205,6 @@ export default {
     reset() {
       this.cancelCurrentAction()
       this.init()
-    },
-    transitionTo(state) {
-      this.state = state
-      switch (this.state) {
-        case STATE.TYPING:
-          this.startTyping()
-          break
-        case STATE.ERASING:
-          this.startErasing()
-          break
-      }
     },
     cancelCurrentAction() {
       if (this.actionInterval) {
@@ -254,7 +233,6 @@ export default {
       if (!this.isDoneTyping) {
         this.shiftCursor(1)
       }
-      this.showCaret = this.showCaretType
 
       if (this.isDoneTyping) {
         this.cancelCurrentAction()
@@ -271,7 +249,6 @@ export default {
           this.shiftCursor(-1)
         }
       }
-      this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
 
       if (this.isDoneErasing) {
         this.cancelCurrentAction()
@@ -285,9 +262,10 @@ export default {
       }
 
       this.moveCursorToStart()
-      this.showCaret = this.isSelectionBasedEraseStyle ? this.showCaretSelect : this.showCaretErase
 
+      this.state = STATE.IDLE
       this.actionTimeout = setTimeout(() => {
+        this.state = STATE.TYPING
         this.typeStep()
         if (!this.isDoneTyping) {
           this.actionInterval = setInterval(this.typeStep, this.typeDelay)
@@ -300,9 +278,10 @@ export default {
       }
 
       this.moveCursorToEnd()
-      this.showCaret = this.showCaretType
 
+      this.state = STATE.IDLE
       this.actionTimeout = setTimeout(() => {
+        this.state = STATE.ERASING
         this.eraseStep()
         if (!this.isDoneErasing) {
           this.actionInterval = setInterval(this.eraseStep, this.eraseDelay)
@@ -314,12 +293,12 @@ export default {
 
       if (this.onLastWord) {
         if (this.eraseFinalText || this.shouldRepeat) {
-          this.transitionTo(STATE.ERASING)
+          this.startErasing()
         } else {
           this.onComplete()
         }
       } else {
-        this.transitionTo(STATE.ERASING)
+        this.startErasing()
       }
     },
     onErased() {
@@ -329,18 +308,17 @@ export default {
         if (this.shouldRepeat) {
           this.repeatCounter++
           this.spoolIndex = 0
-          this.transitionTo(STATE.TYPING)
+          this.startTyping()
         } else {
           this.onComplete()
         }
       } else {
         this.spoolIndex++
-        this.transitionTo(STATE.TYPING)
+        this.startTyping()
       }
     },
     onComplete() {
-      this.showCaret = this.showCaretOnComplete
-      this.transitionTo(STATE.IDLE)
+      this.state = STATE.COMPLETE
       this.$emit('complete')
     }
   },
@@ -364,16 +342,27 @@ export default {
 .vue-typer {
   word-break: break-all;
 
-  .char {
-    display: inline-block;
+  span {
     white-space: pre-wrap;
-
-    &.delete {
-      display: none;
-    }
-    &.select {
-      background-color: $default-selection-bg;
-    }
   }
+}
+
+/* Keep the following styles as low-specificity as possible so they are more easily overridden */
+span {
+  display: inline-block;  // overriden by .erased
+}
+
+.typed {
+  color: $char-typed-color;
+  background-color: $char-typed-background-color;
+}
+
+.selected {
+  color: $char-selected-color;
+  background-color: $char-selected-background-color;
+}
+
+.erased {
+  display: none;
 }
 </style>
