@@ -1,11 +1,14 @@
 <template lang='pug'>
+//- TODO:
+//- Ideally we'd just have span.left and span.right contain all the chars to the left and
+//- right of the cursor, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
+//- Until we can find a solution for this, we just create one span per character.
 span.vue-typer
-  //- Ideally we'd just use 2 spans to contain the characters to the left and right
-  //- of the cursor, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
-  //- Until we can find a solution for this, we just create one span per character.
-  span.char.typed(v-for='l in numLeftChars') {{ currentTextArray[l-1] }}
-  caret(:class='caretClasses')
-  span.char(v-for='r in numRightChars', :class='rightCharClasses') {{ currentTextArray[numLeftChars + r-1] }}
+  span.left
+    span.char.custom.typed(v-for='l in numLeftChars') {{ currentTextArray[l-1] }}
+  caret(:class='caretClasses', :animation='caretAnimation')
+  span.right
+    span.char.custom(v-for='r in numRightChars', :class='rightCharClasses') {{ currentTextArray[numLeftChars + r-1] }}
 </template>
 
 <script>
@@ -84,16 +87,18 @@ export default {
     },
     eraseStyle: {
       type: String,
-      default: ERASE_STYLE.BACKSPACE
+      default: ERASE_STYLE.BACKSPACE,
+      validator() {
+        // TODO
+        return true
+      }
     },
     eraseFinalText: {
       type: Boolean,
       default: false
-    }
-    /*
-    CARET
-    caretAnimation: String ('blink', 'smooth', 'phase', 'expand' and 'solid')
-    */
+    },
+    /* CARET */
+    caretAnimation: String
   },
   data() {
     return {
@@ -339,17 +344,21 @@ export default {
 <style scoped lang='scss'>
 @import 'colors';
 
-.vue-typer {
+span.vue-typer {
   word-break: break-all;
 
-  span {
+  span.char {
     white-space: pre-wrap;
+  }
+
+  span.left, span.right {
+    display: inline;
   }
 }
 
-/* Keep the following styles as low-specificity as possible so they are more easily overridden */
+/* Keep the following .custom.char styles as low-specificity as possible so they are more easily overridden */
 span {
-  display: inline-block;  // overriden by .erased
+  display: inline-block;
 }
 
 .typed {

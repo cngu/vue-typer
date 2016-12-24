@@ -1,20 +1,40 @@
 <template lang='pug'>
-span.caret
+span.caret.custom(:class='animationClass')
 </template>
 
 <script>
+const ANIMATION_CLASS_PREFIX = 'vue-typer-caret-'
+
+export default {
+  props: {
+    animation: {
+      type: String,
+      default: 'blink',
+      validator(value) {
+        // TODO
+        return true
+      }
+    }
+  },
+  computed: {
+    animationClass() {
+      return ANIMATION_CLASS_PREFIX + this.animation
+    }
+  }
+}
 </script>
 
 <style scoped lang='scss'>
 @import 'colors';
+@import 'caret-animations';
 
-.caret {
+span.caret {
   &:empty:before {
     content: '\200b'; // zero width space character
   }
 }
 
-/* Keep the following styles as low-specificity as possible so they are more easily overridden */
+/* Keep the following .custom.caret styles as low-specificity as possible so they are more easily overridden */
 span {
   display: inline-block;
   width: 1px;
