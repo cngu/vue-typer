@@ -91,7 +91,7 @@ export default {
     },
     /*
     CARET
-    caretAnimation: String (see Sublime's styles)
+    caretAnimation: String ('blink', 'smooth', 'phase', 'expand' and 'solid')
     caretColor: String
     selectionBgColor: String
     selectionFgColor: String
@@ -277,6 +277,8 @@ export default {
       }, this.startEraseDelay, this.eraseDelay)
     },
     onTyped() {
+      this.$emit('typed', this.currentText)
+
       if (this.onLastWord) {
         if (this.eraseFinalText || this.shouldRepeat) {
           this.transitionTo(STATE.ERASING)
@@ -288,6 +290,8 @@ export default {
       }
     },
     onErased() {
+      this.$emit('erased', this.currentText)
+
       if (this.onLastWord) {
         if (this.shouldRepeat) {
           this.repeatCounter++
