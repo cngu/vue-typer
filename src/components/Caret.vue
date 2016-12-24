@@ -6,7 +6,7 @@ span.caret
 </script>
 
 <style scoped lang='scss'>
-.caret-container {
+.caret {
   display: inline-block;
   /* TODO: everything below here should be customizable thru props and bound as a style object */
   width: 1px;
