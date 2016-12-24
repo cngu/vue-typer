@@ -37,7 +37,7 @@ module.exports = {
               fallbackLoader: 'vue-style-loader'
             }),
             scss: ExtractTextPlugin.extract({
-              loader: ['css-loader', 'sass-loader']
+              loader: ['css-loader', `sass-loader?includePaths[]=${pathUtil.getPathFromRoot('src/styles')}`]
             })
           },
           postcss: [
