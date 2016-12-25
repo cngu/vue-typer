@@ -7,7 +7,7 @@ var baseWebpackConfig = require('./webpack.config.base')
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    demo: pathUtil.getPathFromRoot('src/demo.js'),
+    demo: pathUtil.getPathFromRoot('src/demo/index.js'),
     vendor: 'vue'
   },
   output: {
