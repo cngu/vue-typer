@@ -28,7 +28,7 @@ const ERASE_STYLE = {
   BACKSPACE: 'backspace',
   SELECT_BACK: 'select-back',
   SELECT_ALL: 'select-all',
-  DISAPPEAR: 'disappear'
+  CLEAR: 'clear'
 }
 
 export default {
@@ -136,7 +136,7 @@ export default {
       return !!this.eraseStyle.match(`^${ERASE_STYLE.SELECT_BACK}|${ERASE_STYLE.SELECT_ALL}$`)
     },
     isEraseAllStyle() {
-      return !!this.eraseStyle.match(`^${ERASE_STYLE.DISAPPEAR}|${ERASE_STYLE.SELECT_ALL}$`)
+      return !!this.eraseStyle.match(`^${ERASE_STYLE.CLEAR}|${ERASE_STYLE.SELECT_ALL}$`)
     },
     isDoneTyping() {
       return this.currentTextIndex >= this.currentText.length
