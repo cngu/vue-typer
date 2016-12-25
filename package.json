@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV='development' webpack-dev-server --config build/webpack.config.dev.js --hot --inline --open --compress",
     "dev:lan": "npm run dev -- --host 0.0.0.0",
-    "demo": "NODE_ENV='production' webpack --config build/webpack.config.demo.js",
+    "demo": "webpack --config build/webpack.config.demo.js",
     "build": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
     "test": "NODE_ENV='testing' echo \"Error: no test specified\" && exit 1",
     "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src",

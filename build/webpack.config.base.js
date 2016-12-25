@@ -1,9 +1,10 @@
 var webpack = require('webpack')
-var pathUtil = require('./path-util.js')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var autoprefixer = require('autoprefixer')
+var pathUtil = require('./path-util.js')
+var vueLoaderUtil = require('./vue-loader-util.js')
 
-module.exports = {
+const config = {
   output: {
     path: pathUtil.getPathFromRoot('dist')
   },
@@ -32,13 +33,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            css: ExtractTextPlugin.extract({
-              loader: 'css-loader',
-              fallbackLoader: 'vue-style-loader'
-            }),
-            scss: ExtractTextPlugin.extract({
-              loader: ['css-loader', `sass-loader?includePaths[]=${pathUtil.getPathFromRoot('src/styles')}`]
-            })
+            css: vueLoaderUtil.getCssLoader(),
+            scss: vueLoaderUtil.getScssLoader()
           },
           postcss: [
             autoprefixer({ browsers: ['last 2 versions'] })
@@ -68,7 +64,14 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new ExtractTextPlugin('style.css'),
     new webpack.NoErrorsPlugin()
   ]
 }
+
+// Only demo builds require ExtractTextPlugin to allow style caching separately from the bundle.
+// In the production build, we must bundle the CSS along with the code.
+if (process.env.NODE_ENV !== 'production') {
+  config.plugins.push(new ExtractTextPlugin('[name].[contenthash].css'))
+}
+
+module.exports = config
