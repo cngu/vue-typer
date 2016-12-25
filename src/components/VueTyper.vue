@@ -1,5 +1,4 @@
 <template lang='pug'>
-//- TODO:
 //- Ideally we'd just have span.left and span.right contain all the chars to the left and
 //- right of the cursor, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
 //- Until we can find a solution for this, we just create one span per character.
@@ -14,8 +13,6 @@ span.vue-typer
 <script>
 import Caret from './Caret'
 import shuffle from 'utils/shuffle'
-import { nonNegativeNumberValidator,
-         stringArrayValidator } from 'utils/validators'
 
 const STATE = {
   IDLE: 'idle',
@@ -36,21 +33,20 @@ export default {
     Caret
   },
   props: {
-    /* GENERAL */
     text: {
       type: [String, Array],
       required: true,
       validator(value) {
         if (typeof value === 'string') {
-          return value.length
+          return value.length > 0
         }
-        return stringArrayValidator(value)
+        return value.every(item => typeof item === 'string' && item.length > 0)
       }
     },
     repeat: {
       type: Number,
       default: Infinity,
-      validator: nonNegativeNumberValidator
+      validator: value => value >= 0
     },
     shuffle: {
       type: Boolean,
@@ -59,45 +55,37 @@ export default {
     initialAction: {
       type: String,
       default: STATE.TYPING,
-      validator(value) {
-        return value === STATE.TYPING || value === STATE.ERASING
-      }
+      validator: value => [STATE.TYPING, STATE.ERASING].includes(value)
     },
-    /* TYPE */
     typeDelay: {
       type: Number,
       default: 70,
-      validator: nonNegativeNumberValidator
+      validator: value => value >= 0
     },
     preTypeDelay: {
       type: Number,
       default: 70,
-      validator: nonNegativeNumberValidator
+      validator: value => value >= 0
     },
-    /* ERASE */
     eraseDelay: {
       type: Number,
       default: 250,
-      validator: nonNegativeNumberValidator
+      validator: value => value >= 0
     },
     preEraseDelay: {
       type: Number,
       default: 2000,
-      validator: nonNegativeNumberValidator
+      validator: value => value >= 0
     },
     eraseStyle: {
       type: String,
       default: ERASE_STYLE.SELECT_ALL,
-      validator() {
-        // TODO
-        return true
-      }
+      validator: value => Object.keys(ERASE_STYLE).some(item => ERASE_STYLE[item] === value)
     },
     eraseFinalText: {
       type: Boolean,
       default: false
     },
-    /* CARET */
     caretAnimation: String
   },
   data() {
@@ -126,9 +114,7 @@ export default {
     rightCharClasses() {
       return {
         selected: this.state === STATE.ERASING && this.isSelectionBasedEraseStyle,
-        erased: this.state === STATE.IDLE ||
-                this.state === STATE.TYPING ||
-                this.state === STATE.COMPLETE ||
+        erased: this.state !== STATE.ERASING ||
                 this.state === STATE.ERASING && !this.isSelectionBasedEraseStyle
       }
     },

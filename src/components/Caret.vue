@@ -10,10 +10,7 @@ export default {
     animation: {
       type: String,
       default: 'blink',
-      validator(value) {
-        // TODO
-        return true
-      }
+      validator: value => /^solid$|^blink$|^smooth$|^phase$|^expand$/.test(value)
     }
   },
   computed: {
