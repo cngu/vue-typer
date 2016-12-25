@@ -49,7 +49,7 @@ export default {
     },
     repeat: {
       type: Number,
-      default: 0,
+      default: Infinity,
       validator: nonNegativeNumberValidator
     },
     shuffle: {
@@ -87,7 +87,7 @@ export default {
     },
     eraseStyle: {
       type: String,
-      default: ERASE_STYLE.BACKSPACE,
+      default: ERASE_STYLE.SELECT_ALL,
       validator() {
         // TODO
         return true
