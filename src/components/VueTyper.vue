@@ -80,7 +80,7 @@ export default {
       default: 250,
       validator: nonNegativeNumberValidator
     },
-    startEraseDelay: {
+    preEraseDelay: {
       type: Number,
       default: 2000,
       validator: nonNegativeNumberValidator
@@ -291,7 +291,7 @@ export default {
         if (!this.isDoneErasing) {
           this.actionInterval = setInterval(this.eraseStep, this.eraseDelay)
         }
-      }, this.startEraseDelay)
+      }, this.preEraseDelay)
     },
     onTyped() {
       this.$emit('typed', this.currentText)
