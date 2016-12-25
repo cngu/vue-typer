@@ -8,7 +8,7 @@ var baseUglifyConfig = require('./uglify.config.base')
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    'vue-typer': pathUtil.getPathFromRoot('src/index.js')
+    'vue-typer': pathUtil.getPathFromRoot('src/vue-typer/index.js')
   },
   output: {
     filename: '[name].min.js',

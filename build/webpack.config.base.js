@@ -2,17 +2,14 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var autoprefixer = require('autoprefixer')
 var pathUtil = require('./path-util.js')
-var vueLoaderUtil = require('./vue-loader-util.js')
+var loaderUtil = require('./loader-util.js')
 
 const config = {
   output: {
     path: pathUtil.getPathFromRoot('dist')
   },
   resolve: {
-    extensions: ['.js', '.vue'],
-    alias: {
-      utils: pathUtil.getPathFromRoot('src/utils')
-    }
+    extensions: ['.js', '.vue']
   },
   module: {
     rules: [
@@ -33,8 +30,8 @@ const config = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            css: vueLoaderUtil.getCssLoader(),
-            scss: vueLoaderUtil.getScssLoader()
+            css: loaderUtil.getVueCssLoader(),
+            scss: loaderUtil.getVueScssLoader()
           },
           postcss: [
             autoprefixer({ browsers: ['last 2 versions'] })
@@ -51,9 +48,7 @@ const config = {
         test: /\.css$/,
         include: pathUtil.getRoot(),
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          loader: 'css-loader'
-        })
+        loader: loaderUtil.getCssLoader()
       }
     ]
   },

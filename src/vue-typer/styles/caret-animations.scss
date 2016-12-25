@@ -1,0 +1,51 @@
+@keyframes vue-typer-caret-blink {
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes vue-typer-caret-smooth {
+	0%,	20% {
+		opacity: 1;
+	}
+	60%, 100% {
+		opacity: 0;
+	}
+}
+
+@keyframes vue-typer-caret-phase {
+	0%,	20% {
+		opacity: 1;
+	}
+	90%, 100% {
+		opacity: 0;
+	}
+}
+
+@keyframes vue-typer-caret-expand {
+	0%,	20% {
+		transform: scaleY(1);
+	}
+	80%, 100% {
+		transform: scaleY(0);
+	}
+}
+
+.vue-typer-caret-blink {
+	animation: vue-typer-caret-blink 1s step-start 0s infinite;
+}
+
+.vue-typer-caret-smooth {
+	animation: vue-typer-caret-smooth 0.5s ease-in-out 0s infinite alternate;
+}
+
+.vue-typer-caret-phase {
+	animation: vue-typer-caret-phase 0.5s ease-in-out 0s infinite alternate;
+}
+
+.vue-typer-caret-expand {
+	animation: vue-typer-caret-expand 0.5s ease-in-out 0s infinite alternate;
+}
