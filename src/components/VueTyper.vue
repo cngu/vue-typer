@@ -69,7 +69,7 @@ export default {
       default: 70,
       validator: nonNegativeNumberValidator
     },
-    startTypeDelay: {
+    preTypeDelay: {
       type: Number,
       default: 70,
       validator: nonNegativeNumberValidator
@@ -275,7 +275,7 @@ export default {
         if (!this.isDoneTyping) {
           this.actionInterval = setInterval(this.typeStep, this.typeDelay)
         }
-      }, this.startTypeDelay)
+      }, this.preTypeDelay)
     },
     startErasing() {
       if (this.actionTimeout || this.actionInterval) {
