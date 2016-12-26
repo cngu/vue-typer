@@ -21,15 +21,25 @@ TODO
 ## Events
 TODO
 
+## Styles
+TODO
+
 ## Changelog
 TODO
 
 ## TODO
-* Update to stable releases of webpack and webpack-dev-server
-* Revisit community discussions around the best way to obtain deterministic hashes so I can remove HashedModuleIdsPlugin
+- [ ] Update to stable releases of:
+  - webpack
+  - webpack-dev-server
+  - extract-text-webpack-plugin
+- [ ] Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
+- [ ] Potential features (contributions are welcome!):
+  - start typing only when VueTyper is on-screen; potentially pause typing when off-screen
+  - smarter typing algorithm: erase only up to the longest common starting substring
+  - is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
 
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016-2017 Chris Nguyen
+Copyright (c) 2016 Chris Nguyen. All rights reserved.
