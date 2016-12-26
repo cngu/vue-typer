@@ -55,7 +55,7 @@ export default {
     initialAction: {
       type: String,
       default: STATE.TYPING,
-      validator: value => [STATE.TYPING, STATE.ERASING].includes(value)
+      validator: value => !!value.match(`^${STATE.TYPING}|${STATE.ERASING}$`)
     },
     typeDelay: {
       type: Number,
