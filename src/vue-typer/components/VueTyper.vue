@@ -33,6 +33,9 @@ export default {
     Caret
   },
   props: {
+    /**
+     * Text(s) to type.
+     */
     text: {
       type: [String, Array],
       required: true,
@@ -43,49 +46,86 @@ export default {
         return value.every(item => typeof item === 'string' && item.length > 0)
       }
     },
+    /**
+     * Number of extra times to type 'text' after the first time.
+     * 0 will type 'text' once, 1 will type three times, Infinity will type forever.
+     */
     repeat: {
       type: Number,
       default: Infinity,
       validator: value => value >= 0
     },
+    /**
+     * Randomly shuffles 'text' (using Fisher-Yates algorithm) before typing it.
+     * If 'repeat' > 0, 'text' will be shuffled again before each repetition.
+     */
     shuffle: {
       type: Boolean,
       default: false
     },
+    /**
+     * 'typing'  - starts VueTyper off as a blank space and begins to type the first word.
+     * 'erasing' - starts VueTyper off with the first word already typed, and begins to erase.
+     */
     initialAction: {
       type: String,
       default: STATE.TYPING,
       validator: value => !!value.match(`^${STATE.TYPING}|${STATE.ERASING}$`)
     },
-    typeDelay: {
-      type: Number,
-      default: 70,
-      validator: value => value >= 0
-    },
+    /**
+     * Milliseconds to wait before typing the first character.
+     */
     preTypeDelay: {
       type: Number,
       default: 70,
       validator: value => value >= 0
     },
+    /**
+     * Milliseconds to wait after typing a character, until the next character is typed.
+     */
+    typeDelay: {
+      type: Number,
+      default: 70,
+      validator: value => value >= 0
+    },
+    /**
+     * Milliseconds to wait before performing the first erase action (backspace, highlight, etc.).
+     */
+     preEraseDelay: {
+      type: Number,
+      default: 2000,
+      validator: value => value >= 0
+    },
+    /**
+     * Milliseconds to wait after performing an erase action (backspace, highlight, etc.),
+     * until the next eraswe action can start.
+     */
     eraseDelay: {
       type: Number,
       default: 250,
       validator: value => value >= 0
     },
-    preEraseDelay: {
-      type: Number,
-      default: 2000,
-      validator: value => value >= 0
-    },
+    /**
+     * 'backspace'   - Erase one character at a time, like pressing backspace.
+     * 'select-back' - Highlight back one character at a time; erase once all characters are highlighted.
+     * 'select-all'  - Highlight all characters at once; erase afterwards.
+     * 'clear'       - Immediately erases everything; text simply disappears.
+     */
     eraseStyle: {
       type: String,
       default: ERASE_STYLE.SELECT_ALL,
       validator: value => Object.keys(ERASE_STYLE).some(item => ERASE_STYLE[item] === value)
     },
+    /**
+     * Flag to erase everything once VueTyper is finished typing. Set to false to leave the last word visible.
+     */
     eraseFinalText: {
       type: Boolean,
       default: false
     },
+    /**
+     * Caret animation style. See Caret.vue.
+     */
     caretAnimation: String
   },
   data() {

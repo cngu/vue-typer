@@ -7,6 +7,9 @@ const ANIMATION_CLASS_PREFIX = 'vue-typer-caret-'
 
 export default {
   props: {
+    /**
+     * Caret animation similar to Sublime and VSCode: 'solid', 'blink', 'smooth', 'phase', 'expand'.
+     */
     animation: {
       type: String,
       default: 'blink',
