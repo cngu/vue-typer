@@ -170,18 +170,12 @@ export default {
       } else {
         // Don't violate one-way binding, make a copy! Vue doesn't make a copy for us to keep things reactive
         let textCopy = this.text.slice()
-
         textCopy = textCopy.filter(textToType => textToType.length)
-
-        if (this.shuffle && textCopy.length > 1) {
-          shuffle(textCopy)
-        }
-
         this.spool = textCopy
       }
 
-      this.spoolIndex = 0
       this.repeatCounter = 0
+      this.resetSpool()
 
       if (this.initialAction === STATE.TYPING) {
         this.startTyping()
@@ -196,6 +190,12 @@ export default {
     reset() {
       this.cancelCurrentAction()
       this.init()
+    },
+    resetSpool() {
+      this.spoolIndex = 0
+      if (this.shuffle && this.spool.length > 1) {
+        shuffle(this.spool)
+      }
     },
     cancelCurrentAction() {
       if (this.actionInterval) {
@@ -298,7 +298,7 @@ export default {
       if (this.onLastWord) {
         if (this.shouldRepeat) {
           this.repeatCounter++
-          this.spoolIndex = 0
+          this.resetSpool()
           this.startTyping()
         } else {
           this.onComplete()
