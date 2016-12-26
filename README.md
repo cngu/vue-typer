@@ -3,6 +3,8 @@ Vue component that simulates a user typing, selecting, and deleting text.
 
 ## Demo
 TODO
+Link here (also add link to github repo description at the top)
+<p align="center"><img src="" alt="VueTyper demo gif"/></p>
 
 ## Getting Started
 
@@ -21,14 +23,14 @@ You may register VueTyper either globally or locally. [What's the difference? Se
 
 #### Local Registration
 1. Import the VueTyper component directly from your Vue component file:
-```
+```javascript
 import { VueTyper } from 'vue-typer'
 // or
 var VueTyper = require('vue-typer').VueTyper
 ```
 
 2. Register it as a local component in your Vue component options:
-```
+```javascript
 var MyComponent = {
   // ...
   components: {
@@ -38,25 +40,25 @@ var MyComponent = {
 ```
 
 3. Use vue-typer in your Vue component's template:
-```
+```html
 <vue-typer text='Hello World! I was registered locally!'></vue-typer>
 ```
 
 #### Global Registration
 1. Import the VueTyper plugin in your application entry point:
-```
+```javascript
 import VueTyperPlugin from 'vue-typer'
 // or
 var VueTyperPlugin = require('vue-typer').default
 ```
 
 2. Register the VueTyper plugin with Vue
-```
+```javascript
 Vue.use(VueTyperPlugin)
 ```
 
 3. Now you can freely use vue-typer in any Vue component template:
-```
+```html
 <vue-typer text='Hello World! I was registered globally!'></vue-typer>
 ```
 
@@ -69,7 +71,7 @@ TODO
 
 Description of prop here
 
-```
+```html
 Code sample of using prop here
 ```
 
@@ -79,10 +81,10 @@ TODO
 #### EventName
 - Event data:
   - (String) word that finished typing
-```
+```html
 Code sample of attaching event listener in template
 ```
-```
+```javascript
 Code sample of event handler function
 ```
 
@@ -91,7 +93,7 @@ TODO
 
 To keep the separation of concern between component code and styles, VueTyper can be fully styled through CSS (as opposed to props):
 
-```
+```css
 CSS selector format here
 ```
 
