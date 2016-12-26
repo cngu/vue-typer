@@ -310,7 +310,7 @@ export default {
     },
     onComplete() {
       this.state = STATE.COMPLETE
-      this.$emit('complete')
+      this.$emit('completed')
     }
   },
   watch: {
