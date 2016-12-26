@@ -17,7 +17,6 @@ npm install --save vue-typer?
 ```
 
 ## Usage
-### Importing VueTyper
 You may register VueTyper either globally or locally. [What's the difference? See the Vue documentation here.](https://vuejs.org/v2/guide/components.html#Registration)
 
 #### Local Registration
@@ -64,7 +63,7 @@ Vue.use(VueTyperPlugin)
 ## Props
 TODO
 
-### PropName
+#### PropName
 - type: `String | Array`
 - required
 
@@ -77,8 +76,8 @@ Code sample of using prop here
 ## Events
 TODO
 
-### EventName
-- Event Data:
+#### EventName
+- Event data:
   - (String) word that finished typing
 ```
 Code sample of attaching event listener in template
