@@ -91,7 +91,7 @@ export default {
     /**
      * Milliseconds to wait before performing the first erase action (backspace, highlight, etc.).
      */
-     preEraseDelay: {
+    preEraseDelay: {
       type: Number,
       default: 2000,
       validator: value => value >= 0
