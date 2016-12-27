@@ -1,4 +1,4 @@
-import './styles/demo.css'
+import './styles/demo.scss'
 import Vue from 'vue'
 import Demo from './Demo'
 
