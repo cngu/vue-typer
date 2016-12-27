@@ -14,6 +14,15 @@ module.exports = {
       fallbackLoader: 'style-loader'
     })
   },
+  getScssLoader: function() {
+    if (process.env.NODE_ENV === 'production') {
+      return `style-loader!css-loader!sass-loader?includePaths[]=${vueTyperStyles}&includePaths[]=${demoStyles}`
+    }
+    return ExtractTextPlugin.extract({
+      loader: ['css-loader', `sass-loader?includePaths[]=${vueTyperStyles}&includePaths[]=${demoStyles}`],
+      fallbackLoader: 'style-loader'
+    })
+  },
   getVueCssLoader: function() {
     if (process.env.NODE_ENV === 'production') {
       return 'vue-style-loader!css-loader'

@@ -29,6 +29,7 @@ const ERASE_STYLE = {
 }
 
 export default {
+  name: 'VueTyper',
   components: {
     Caret
   },

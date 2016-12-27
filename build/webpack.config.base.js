@@ -49,6 +49,12 @@ const config = {
         include: pathUtil.getRoot(),
         exclude: /node_modules/,
         loader: loaderUtil.getCssLoader()
+      },
+      {
+        test: /\.scss$/,
+        include: pathUtil.getRoot(),
+        exclude: /node_modules/,
+        loader: loaderUtil.getScssLoader()
       }
     ]
   },
