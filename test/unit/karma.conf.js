@@ -4,8 +4,8 @@ var pathUtil = require('../../build/path-util.js')
 
 var baseConfig = require('../../build/webpack.config.base')
 var webpackConfig = merge(baseConfig, {
-  // use inline sourcemap for karma-sourcemap-loader
-  devtool: '#inline-source-map'
+  // use eval for karma-sourcemap-loader
+  devtool: '#eval'
 })
 
 // Insert isparta loader

@@ -9,7 +9,7 @@
     "demo": "webpack --config build/webpack.config.demo.js",
     "build": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
     "unit": "NODE_ENV='testing' karma start test/unit/karma.conf.js",
-    "unit:debug": "NODE_ENV='testing' echo \"Error: TODO\" && exit 1",
+    "unit:debug": "npm run unit -- --browsers Chrome",
     "test": "npm run unit",
     "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src",
     "clean": "rimraf ./dist ./index.html"
@@ -54,6 +54,7 @@
     "html-webpack-plugin": "^2.24.1",
     "isparta-loader": "^2.0.0",
     "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "^1.0.2",
