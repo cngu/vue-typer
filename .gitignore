@@ -3,6 +3,6 @@
 node_modules
 *.log
 
-#TODO: Remove/adjust when we publish/export the Vue component & plugin
+# Do not check this in. These will be pushed to gh-pages.
 dist
 index.html
