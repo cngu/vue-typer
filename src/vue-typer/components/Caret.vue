@@ -57,6 +57,6 @@ span {
 }
 
 .complete {
-  background-color: $caret-complete-color;
+  display: none;
 }
 </style>
