@@ -8,8 +8,9 @@
     "dev:lan": "npm run dev -- --host 0.0.0.0",
     "demo": "webpack --config build/webpack.config.demo.js",
     "build": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
-    "unit": "NODE_ENV='testing' karma start test/unit/karma.conf.js",
-    "unit:debug": "npm run unit -- --browsers Chrome",
+    "unit": "npm run unit:watch -- --single-run",
+    "unit:watch": "NODE_ENV='testing' karma start test/unit/karma.conf.js",
+    "unit:debug": "npm run unit:watch -- --browsers Chrome",
     "test": "npm run unit",
     "lint": "NODE_ENV='production' eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src",
     "clean": "rimraf ./dist ./index.html"
