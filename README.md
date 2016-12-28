@@ -11,11 +11,19 @@ Link here (also add link to github repo description at the top)
 ### Prerequisites
 - Vue v2.x ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
 
-### Install
+### Installation
 TODO: 
-VueTyper is available on npm:
+#### npm
+Use this method if you wish to import/require VueTyper as a module.
 ```
 npm install --save vue-typer?
+```
+
+#### CDN
+Use this method if you wish to access VueTyper globally via `window.VueTyper`.
+
+```html
+<script src="path/to/vue-typer.min.js"></script>
 ```
 
 ## Usage
@@ -23,44 +31,54 @@ You may register VueTyper either globally or locally. [What's the difference? Se
 
 #### Local Registration
 1. Import the VueTyper component directly from your Vue component file:
-```javascript
-import { VueTyper } from 'vue-typer'
-// or
-var VueTyper = require('vue-typer').VueTyper
-```
+  ```javascript
+  // ES6
+  import { VueTyper } from 'vue-typer'
+  // CommonJS
+  var VueTyper = require('vue-typer').VueTyper
+  // Global
+  var VueTyper = window.VueTyper.VueTyper
+  ```
 
 2. Register it as a local component in your Vue component options:
-```javascript
-var MyComponent = {
-  // ...
-  components: {
-    VueTyper  // ES6 property shorthand + Vue should automatically dasherize the key for us
+  ```javascript
+  var MyComponent = {
+    // ...
+    components: {
+      // ES6
+      VueTyper  // property shorthand + Vue should automatically dasherize the key for us
+      // pre-ES6
+      'vue-typer': VueTyper
+    }
   }
-}
-```
+  ```
 
 3. Use vue-typer in your Vue component's template:
-```html
-<vue-typer text='Hello World! I was registered locally!'></vue-typer>
-```
+
+  ```html
+  <vue-typer text='Hello World! I was registered locally!'></vue-typer>
+  ```
 
 #### Global Registration
 1. Import the VueTyper plugin in your application entry point:
-```javascript
-import VueTyperPlugin from 'vue-typer'
-// or
-var VueTyperPlugin = require('vue-typer').default
-```
+  ```javascript
+  // ES6
+  import VueTyperPlugin from 'vue-typer'
+  // CommonJS
+  var VueTyperPlugin = require('vue-typer').default
+  // Global
+  var VueTyperPlugin = window.VueTyper.default
+  ```
 
 2. Register the VueTyper plugin with Vue
-```javascript
-Vue.use(VueTyperPlugin)
-```
+  ```javascript
+  Vue.use(VueTyperPlugin)
+  ```
 
 3. Now you can freely use vue-typer in any Vue component template:
-```html
-<vue-typer text='Hello World! I was registered globally!'></vue-typer>
-```
+  ```html
+  <vue-typer text='Hello World! I was registered globally!'></vue-typer>
+  ```
 
 ## Props
 TODO
