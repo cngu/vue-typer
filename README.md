@@ -12,7 +12,7 @@ Link here (also add link to github repo description at the top)
 - Vue v2.x ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
 
 ### Install
-TODO: 
+TODO:
 VueTyper is available on npm:
 ```
 npm install --save vue-typer?
@@ -110,7 +110,7 @@ TODO
   - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen
   - [ ] smarter typing algorithm: erase only up to the longest common starting substring
   - [ ] is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
-
+- Vue documentation considers rendering-specific tests to still be 'unit' tests. Should we split this out into 'integration' tests?
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
