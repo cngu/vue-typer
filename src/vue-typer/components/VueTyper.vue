@@ -1,6 +1,6 @@
 <template lang='pug'>
 //- Ideally we'd just have span.left and span.right contain all the chars to the left and
-//- right of the cursor, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
+//- right of the caret, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
 //- Until we can find a solution for this, we just create one span per character.
 span.vue-typer
   span.left
@@ -224,7 +224,7 @@ export default {
         // This is a special case when we start off in erasing mode. The first text is already considered typed, and
         // it may even be the only text in the spool. So don't jump directly into erasing mode (in-case 'repeat' and
         // 'eraseFinalText' are configured to false), and instead jump to the "we just finished typing a word" phase.
-        this.moveCursorToEnd()
+        this.moveCaretToEnd()
         this.onTyped()
       }
     },
@@ -248,22 +248,22 @@ export default {
         this.actionTimeout = 0
       }
     },
-    shiftCursor(delta) {
+    shiftCaret(delta) {
       this.previousTextIndex = this.currentTextIndex
-      const newCursorIndex = this.currentTextIndex + delta
-      this.currentTextIndex = Math.min(Math.max(newCursorIndex, 0), this.currentText.length)
+      const newCaretIndex = this.currentTextIndex + delta
+      this.currentTextIndex = Math.min(Math.max(newCaretIndex, 0), this.currentText.length)
     },
-    moveCursorToStart() {
+    moveCaretToStart() {
       this.previousTextIndex = this.currentTextIndex
       this.currentTextIndex = 0
     },
-    moveCursorToEnd() {
+    moveCaretToEnd() {
       this.previousTextIndex = this.currentTextIndex
       this.currentTextIndex = this.currentText.length
     },
     typeStep() {
       if (!this.isDoneTyping) {
-        this.shiftCursor(1)
+        this.shiftCaret(1)
       }
 
       if (this.isDoneTyping) {
@@ -276,9 +276,9 @@ export default {
     eraseStep() {
       if (!this.isDoneErasing) {
         if (this.isEraseAllStyle) {
-          this.moveCursorToStart()
+          this.moveCaretToStart()
         } else {
-          this.shiftCursor(-1)
+          this.shiftCaret(-1)
         }
       }
 
@@ -293,7 +293,7 @@ export default {
         return
       }
 
-      this.moveCursorToStart()
+      this.moveCaretToStart()
 
       this.state = STATE.IDLE
       this.actionTimeout = setTimeout(() => {
@@ -309,7 +309,7 @@ export default {
         return
       }
 
-      this.moveCursorToEnd()
+      this.moveCaretToEnd()
 
       this.state = STATE.IDLE
       this.actionTimeout = setTimeout(() => {
