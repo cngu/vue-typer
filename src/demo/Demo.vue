@@ -2,7 +2,7 @@
 .demo
   header
     h1.title
-      vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='250', caret-animation='smooth')
+      vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='400', caret-animation='smooth')
     .links
       button Github circle
       button Documentation / API
@@ -12,6 +12,8 @@
 
   main.container
     section#playground.row
+      h4.col-xs-12.text-xs-center VueTyper Playground
+
       #output-panel.card.col-xs-12.col-lg-6
         h3.demo-typer-container.row.flex-items-xs-center.flex-items-xs-middle
           vue-typer.demo-typer(
@@ -131,10 +133,23 @@
       #code-panel.card.col-xs-12.col-lg-6
         | TODO: CODE PANEL HERE
 
-    section#style-showcase
-      #color-demo-panel e
-      #text-caret-demo-panel f
-      #state-demo-panel g
+    section#style-showcase.row
+      h4.col-xs-12.text-xs-center VueTyper is also fully stylable with CSS!
+      p.col-xs-12.text-xs-center Here are some examples. See the documentationTODOLINK for details.
+      .col-xs
+        .row
+          #color-demo-panel.card.col-xs-12.col-lg
+            h4.text-xs-center
+              vue-typer.code-typer(text='Katniss Everdeen', caret-animation='blink')
+            | #[br]CSS HERE
+          #text-caret-demo-panel.card.col-xs-12.col-lg
+            h4.card-title.text-xs-center
+              vue-typer.strikethrough-typer(text='Katniss Everdeen')
+            | #[br]CSS HERE
+          #state-demo-panel.card.col-xs-12.col-lg
+            h4.text-xs-center
+              vue-typer.state-typer(text='Katniss Everdeen', caret-animation='solid')
+            | #[br]CSS HERE
 
   footer
     small
@@ -186,6 +201,8 @@ export default {
 <style scoped lang='scss'>
 @import 'colors';
 
+$section-vertical-spacer: 50px;
+
 .demo {
   header {
     display: flex;
@@ -207,7 +224,12 @@ export default {
   }
 
   main {
+    margin-top: $section-vertical-spacer;
+    margin-bottom: $section-vertical-spacer * 2;
+
     #playground {
+      margin-bottom: $section-vertical-spacer;
+
       #output-panel {
         .demo-typer-container {
           height: 100%;
@@ -223,9 +245,14 @@ export default {
         margin-bottom: initial;
       }
     }
+
     .card {
       padding: 15px;
       margin-bottom: initial;
+    }
+
+    h4 {
+      margin-bottom: 20px;
     }
   }
 
