@@ -8,7 +8,7 @@ var baseWebpackConfig = require('./webpack.config.base')
 module.exports = merge(baseWebpackConfig, {
   entry: {
     demo: pathUtil.getPathFromRoot('src/demo/index.js'),
-    vendor: ['vue', pathUtil.getPathFromRoot('src/demo/lib/bootstrap/index.js')]
+    vendor: ['vue', pathUtil.getLibPath('demo', 'bootstrap'), pathUtil.getLibPath('demo', 'prism')]
   },
   output: {
     filename: '[name].js',

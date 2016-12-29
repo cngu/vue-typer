@@ -7,5 +7,8 @@ module.exports = {
   },
   getPathFromRoot: function(relativePath) {
     return path.join(projectRoot, relativePath)
+  },
+  getLibPath: function(project, libName) {
+    return path.join(projectRoot, `src/${project}/lib/${libName}/index.js`)
   }
 }
