@@ -238,8 +238,12 @@ $section-vertical-spacer: 50px;
         }
       }
       #text-panel {
-        textarea {
-          width: 100%;
+        .form-group {
+          margin-bottom: initial;
+
+          textarea {
+            width: 100%;
+          }
         }
       }
       #config-panel {
