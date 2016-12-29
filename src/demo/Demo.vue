@@ -49,7 +49,7 @@
                     input.form-check-input(type='checkbox', id='shuffle', v-model='shuffle')
 
             .form-group.row.flex-items-xs-center
-              label.col-xs-4.col-lg-6(for='eraseFinalText') eraseFinalText
+              label.col-xs-4.col-lg-6.flex-xs-middle.shrink-text(for='eraseFinalText') eraseOnComplete
               .col-xs-4.col-lg-6
                 .form-check
                   label.form-check-label
@@ -243,6 +243,9 @@ $section-vertical-spacer: 50px;
 
       .form-group {
         margin-bottom: initial;
+      }
+      .shrink-text {
+       font-size: 0.9rem;
       }
     }
 
