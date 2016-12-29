@@ -171,22 +171,19 @@ export default {
     VueTyper
   },
   data() {
-    const initialText = ['web applications', 'user interfaces', 'landing pages', 'corporate websites']
+    const initialText = ['Arya Stark', 'Jon Snow', 'Daenerys Targaryen', 'Melisandre', 'Tyrion Lannister']
 
     return {
       textModel: initialText.join('\n'),
       repeatModel: Infinity,
       shuffle: false,
       initialAction: 'typing',
-
       typeDelay: 70,
       preTypeDelay: 70,
       eraseDelay: 250,
       preEraseDelay: 2000,
-
       eraseStyle: 'select-all',
       eraseFinalText: false,
-
       caretAnimation: 'blink'
     }
   },
