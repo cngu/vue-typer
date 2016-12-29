@@ -1,1 +1,1 @@
-require('./bootstrap-flex.min.css')
+import './bootstrap-flex.min.css'
