@@ -1,105 +1,146 @@
 <template lang='pug'>
 .demo
-  .vue-typer-container
-    vue-typer(
-      :text='text',
-      :repeat='repeat',
-      :shuffle='shuffle',
-      :initial-action='initialAction',
+  header
+    h1.title
+      vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='250', caret-animation='smooth')
+    .links
+      button Github circle
+      button Documentation / API
+      button Download circle
+    .badges
+      p Github stars(ghbtbs) | latest ver | num downloads | license badge
 
-      :type-delay='typeDelay',
-      :pre-type-delay='preTypeDelay',
-      :erase-delay='eraseDelay',
-      :pre-erase-delay='preEraseDelay',
-      :erase-style='eraseStyle',
-      :erase-final-text='eraseFinalText',
+  main.container
+    section#playground.row
+      #output-panel.card.col-xs-12.col-lg-6
+        h3.demo-typer-container.row.flex-items-xs-center.flex-items-xs-middle
+          vue-typer.demo-typer(
+            :text='text',
+            :repeat='repeat',
+            :shuffle='shuffle',
+            :initial-action='initialAction',
+            :pre-type-delay='preTypeDelay',
+            :type-delay='typeDelay',
+            :pre-erase-delay='preEraseDelay',
+            :erase-delay='eraseDelay',
+            :erase-style='eraseStyle',
+            :erase-final-text='eraseFinalText',
+            :caret-animation='caretAnimation')
 
-      :caret-animation='caretAnimation')
+      #text-panel.card.col-xs-12.col-lg-6
+        .form-group
+          label(for='text') List of words to type:
+          textarea(id='text', v-model='textModel', placeholder='text', :rows='3')
 
-  .props
-    .section
-      h1 General Props
+      #config-panel.card.col-xs-12.col-lg-6
+        .row
+          #general-config.col-xs-12.col-lg-6
+            .form-group.row.flex-items-xs-center
+              label.col-form-label.col-xs-4.col-lg-4(for='repeat') repeat
+              input.col-xs-4.col-lg-8(id='repeat', :min='0', v-model='repeatModel')
 
-      | text
-      br
-      textarea(v-model='textModel', placeholder='add multiple lines')
-      br
+            .form-group.row.flex-items-xs-center
+              label.col-xs-4.col-lg-6(for='shuffle') shuffle
+              .col-xs-4.col-lg-6
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='checkbox', id='shuffle', v-model='shuffle')
 
-      label(for='repeat') repeat
-      input(id='repeat', :min='0', v-model='repeatModel')
-      br
+            .form-group.row.flex-items-xs-center
+              label.col-xs-4.col-lg-6(for='eraseFinalText') eraseFinalText
+              .col-xs-4.col-lg-6
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='checkbox', id='eraseFinalText', v-model='eraseFinalText')
 
-      label(for='shuffle') shuffle
-      input(type='checkbox', id='shuffle', v-model='shuffle')
-      br
+            .form-group.row.flex-items-xs-center
+              label.col-xs-4.col-lg-5 initialAction
+              .col-xs-4.col-lg-7
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', value='typing', v-model='initialAction')
+                    = " typing"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', value='erasing', v-model='initialAction')
+                    = " erasing"
 
-      | initialAction
-      br
-      input(type='radio', id='typing', value='typing', v-model='initialAction')
-      label(for='typing') typing
-      br
-      input(type='radio', id='erasing', value='erasing', v-model='initialAction')
-      label(for='erasing') erasing
-      br
+          #delay-config.col-xs-12.col-lg-6
+            .form-group.row.flex-items-xs-center
+              label.col-form-label.col-xs-4.col-lg-6(for='preTypeDelay') preTypeDelay
+              input.col-xs-4.col-lg-6(id='preTypeDelay', :min='0', v-model.number='preTypeDelay')
 
-    .section
-      h1 Typing/Erasing
+            .form-group.row.flex-items-xs-center
+              label.col-form-label.col-xs-4.col-lg-6(for='typeDelay') typeDelay
+              input.col-xs-4.col-lg-6(id='typeDelay', :min='0', v-model.number='typeDelay')
 
-      label(for='typeDelay') typeDelay
-      input(type='number', id='typeDelay', :min='0', v-model.number='typeDelay')
-      br
+            .form-group.row.flex-items-xs-center
+              label.col-form-label.col-xs-4.col-lg-6(for='preEraseDelay') preEraseDelay
+              input.col-xs-4.col-lg-6(id='preEraseDelay', :min='0', v-model.number='preEraseDelay')
 
-      label(for='preTypeDelay') preTypeDelay
-      input(type='number', id='preTypeDelay', :min='0', v-model.number='preTypeDelay')
-      br
+            .form-group.row.flex-items-xs-center
+              label.col-form-label.col-xs-4.col-lg-6(for='eraseDelay') eraseDelay
+              input.col-xs-4.col-lg-6(id='eraseDelay', :min='0', v-model.number='eraseDelay')
 
-      label(for='eraseDelay') eraseDelay
-      input(type='number', id='eraseDelay', :min='0', v-model.number='eraseDelay')
-      br
+          #erase-style-config.col-xs-12.col-lg-6
+            .form-group.row.flex-items-xs-center
+              label.col-xs-4.col-lg-5 eraseStyle
+              .col-xs-4.col-lg-7
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='backspace', value='backspace', v-model='eraseStyle')
+                    = " backspace"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='select-back', value='select-back', v-model='eraseStyle')
+                    = " select-back"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='select-all', value='select-all', v-model='eraseStyle')
+                    = " select-all"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='clear', value='clear', v-model='eraseStyle')
+                    = " clear"
 
-      label(for='preEraseDelay') preEraseDelay
-      input(type='number', id='preEraseDelay', :min='0', v-model.number='preEraseDelay')
-      br
+          #caret-config.col-xs-12.col-lg-6
+            .form-group.row.flex-items-xs-center
+              label.col-xs-4.col-lg-6 caretAnimation
+              .col-xs-4.col-lg-6
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='solid', value='solid', v-model='caretAnimation')
+                    = " solid"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='blink', value='blink', v-model='caretAnimation')
+                    = " blink"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='smooth', value='smooth', v-model='caretAnimation')
+                    = " smooth"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='phase', value='phase', v-model='caretAnimation')
+                    = " phase"
+                .form-check
+                  label.form-check-label
+                    input.form-check-input(type='radio', id='expand', value='expand', v-model='caretAnimation')
+                    = " expand"
 
-      | eraseStyle
-      br
-      input(type='radio', id='backspace', value='backspace', v-model='eraseStyle')
-      label(for='backspace') backspace
-      br
-      input(type='radio', id='select-back', value='select-back', v-model='eraseStyle')
-      label(for='select-back') select-back
-      br
-      input(type='radio', id='select-all', value='select-all', v-model='eraseStyle')
-      label(for='select-all') select-all
-      br
-      input(type='radio', id='clear', value='clear', v-model='eraseStyle')
-      label(for='clear') clear
-      br
+      #code-panel.card.col-xs-12.col-lg-6
+        | TODO: CODE PANEL HERE
 
-      label(for='eraseFinalText') eraseFinalText
-      input(type='checkbox', id='eraseFinalText', v-model='eraseFinalText')
-      br
+    section#style-showcase
+      #color-demo-panel e
+      #text-caret-demo-panel f
+      #state-demo-panel g
 
-    .section
-      h1 Caret
-
-      | caretAnimation
+  footer
+    small
+      | Released under the #[a(href='https://opensource.org/licenses/MIT') MIT License]
       br
-      input(type='radio', id='solid', value='solid', v-model='caretAnimation')
-      label(for='solid') solid
-      br
-      input(type='radio', id='blink', value='blink', v-model='caretAnimation')
-      label(for='blink') blink
-      br
-      input(type='radio', id='smooth', value='smooth', v-model='caretAnimation')
-      label(for='smooth') smooth
-      br
-      input(type='radio', id='phase', value='phase', v-model='caretAnimation')
-      label(for='phase') phase
-      br
-      input(type='radio', id='expand', value='expand', v-model='caretAnimation')
-      label(for='expand') expand
-
+      | Copyright &copy; 2016-#{new Date().getFullYear()} Chris Nguyen
 </template>
 
 <script>
@@ -141,7 +182,84 @@ export default {
 }
 </script>
 
+
+<style scoped lang='scss'>
+@import 'colors';
+
+.demo {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: white;
+    background: $vue-blue;
+
+    .title {
+
+    }
+    .links {
+
+    }
+    .badges {
+
+    }
+  }
+
+  main {
+    #playground {
+      #output-panel {
+        .demo-typer-container {
+          height: 100%;
+        }
+      }
+      #text-panel {
+        textarea {
+          width: 100%;
+        }
+      }
+
+      .form-group {
+        margin-bottom: initial;
+      }
+    }
+    .card {
+      padding: 15px;
+      margin-bottom: initial;
+    }
+  }
+
+  footer {
+    color: white;
+    background: $vue-green;
+    text-align: center;
+
+    a {
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+  }
+}
+</style>
+
 <style lang='scss'>
+header {
+  .title-typer {
+    font-weight: 300;
+
+    .custom.char {
+      color: white;
+    }
+    .custom.caret {
+      background-color: white;
+      &.complete {
+        display: inline-block;
+      }
+    }
+  }
+}
+
 @keyframes test-expand {
 	0%,
 	20% {
@@ -164,58 +282,51 @@ export default {
 	}
 }
 
-.demo {
-  .vue-typer-container {
-    height: 50px;
-  }
-}
-
 /* TODO: Include in README */
 .vue-typer {
-  font-size: 30px;
   font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   user-select: none;
   cursor: default;
 
-  .custom.char {
-    color: purple;
+  // .custom.char {
+  //   color: purple;
 
-    &.typed {
-      color: white;
-      background-color: lightgreen;
-    }
-    &.selected {
-      background-color: lightblue;
-      text-decoration: line-through;
-    }
-    &.erased {
-      display: initial;
-      color: white;
-      background-color: lightred;
-    }
-  }
+  //   &.typed {
+  //     color: white;
+  //     background-color: lightgreen;
+  //   }
+  //   &.selected {
+  //     background-color: lightblue;
+  //     text-decoration: line-through;
+  //   }
+  //   &.erased {
+  //     display: initial;
+  //     color: white;
+  //     background-color: lightred;
+  //   }
+  // }
 
-  .custom.caret {
-    // animation: test-smooth 0.5s ease-in-out 0s infinite alternate;
-    width: 10px;
+  // .custom.caret {
+  //   // animation: test-smooth 0.5s ease-in-out 0s infinite alternate;
+  //   width: 10px;
 
-    &.idle {
-      background-color: black;
-    }
-    &.typing {
-      background-color: green;
-    }
-    &.selecting {
-      display: inline-block;
-      background-color: blue;
-    }
-    &.erasing {
-      background-color: red;
-      // animation: test-expand 0.5s ease-in-out 0s infinite alternate;
-    }
-    &.complete {
-      background-color: purple;
-    }
-  }
+  //   &.idle {
+  //     background-color: black;
+  //   }
+  //   &.typing {
+  //     background-color: green;
+  //   }
+  //   &.selecting {
+  //     display: inline-block;
+  //     background-color: blue;
+  //   }
+  //   &.erasing {
+  //     background-color: red;
+  //     // animation: test-expand 0.5s ease-in-out 0s infinite alternate;
+  //   }
+  //   &.complete {
+  //     background-color: purple;
+  //   }
+  // }
 }
 </style>

@@ -1,4 +1,6 @@
 import './styles/demo.scss'
+import './lib/bootstrap/bootstrap-flex.min.css'
+
 import Vue from 'vue'
 import Demo from './Demo'
 
