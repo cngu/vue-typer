@@ -39,7 +39,8 @@
           #general-config.col-xs-12.col-lg-6
             .form-group.row.flex-items-xs-center
               label.col-form-label.col-xs-4.col-lg-4(for='repeat') repeat
-              input.col-xs-4.col-lg-8(id='repeat', :min='0', v-model='repeatModel')
+              .col-xs-4.col-lg-8
+                input.form-control(id='repeat', :min='0', v-model='repeatModel')
 
             .form-group.row.flex-items-xs-center
               label.col-xs-4.col-lg-6(for='shuffle') shuffle
@@ -70,19 +71,23 @@
           #delay-config.col-xs-12.col-lg-6
             .form-group.row.flex-items-xs-center
               label.col-form-label.col-xs-4.col-lg-6(for='preTypeDelay') preTypeDelay
-              input.col-xs-4.col-lg-6(id='preTypeDelay', :min='0', v-model.number='preTypeDelay')
+              .col-xs-4.col-lg-6
+                input.form-control(id='preTypeDelay', :min='0', v-model.number='preTypeDelay')
 
             .form-group.row.flex-items-xs-center
               label.col-form-label.col-xs-4.col-lg-6(for='typeDelay') typeDelay
-              input.col-xs-4.col-lg-6(id='typeDelay', :min='0', v-model.number='typeDelay')
+              .col-xs-4.col-lg-6
+                input.form-control(id='typeDelay', :min='0', v-model.number='typeDelay')
 
             .form-group.row.flex-items-xs-center
               label.col-form-label.col-xs-4.col-lg-6(for='preEraseDelay') preEraseDelay
-              input.col-xs-4.col-lg-6(id='preEraseDelay', :min='0', v-model.number='preEraseDelay')
+              .col-xs-4.col-lg-6
+                input.form-control(id='preEraseDelay', :min='0', v-model.number='preEraseDelay')
 
             .form-group.row.flex-items-xs-center
               label.col-form-label.col-xs-4.col-lg-6(for='eraseDelay') eraseDelay
-              input.col-xs-4.col-lg-6(id='eraseDelay', :min='0', v-model.number='eraseDelay')
+              .col-xs-4.col-lg-6
+                input.form-control(id='eraseDelay', :min='0', v-model.number='eraseDelay')
 
           #erase-style-config.col-xs-12.col-lg-6
             .form-group.row.flex-items-xs-center
@@ -240,9 +245,10 @@ $section-vertical-spacer: 50px;
           width: 100%;
         }
       }
-
-      .form-group {
-        margin-bottom: initial;
+      #config-panel {
+        .col-form-label {
+          padding-top: 0.4rem;
+        }
       }
       .shrink-text {
        font-size: 0.9rem;
