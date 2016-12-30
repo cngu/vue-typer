@@ -45,8 +45,8 @@ You may register VueTyper either globally or locally. [What's the difference? Se
   var MyComponent = {
     // ...
     components: {
-      // ES6
-      VueTyper  // property shorthand + Vue should automatically dasherize the key for us
+      // ES6; property shorthand + Vue should automatically dasherize the key for us
+      VueTyper
       // pre-ES6
       'vue-typer': VueTyper
     }
@@ -130,8 +130,9 @@ TODO
   - [ ] smarter typing algorithm: erase only up to the longest common starting substring
   - [ ] is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
 - Vue documentation considers rendering-specific tests to still be 'unit' tests. Should we split this out into 'integration' tests?
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016 Chris Nguyen. All rights reserved.
+Copyright &copy; 2016 Chris Nguyen. All rights reserved.
