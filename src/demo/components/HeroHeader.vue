@@ -1,6 +1,6 @@
 <template lang='pug'>
-header
-  h1
+header.jumbotron.jumbotron-fluid
+  h1.display-4
     vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='400', caret-animation='smooth')
   .links
     button Github circle

@@ -34,6 +34,8 @@
 </template>
 
 <style scoped lang='scss'>
+@import 'colors';
+
 $section-vertical-spacer: 4rem;
 
 .app-layout {
@@ -47,6 +49,7 @@ $section-vertical-spacer: 4rem;
     h4 {
       height: 1.1em;
       margin-bottom: 1em;
+      color: $vue-blue;
     }
     .card {
       padding: 1em;
