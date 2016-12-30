@@ -123,6 +123,7 @@ TODO
   - [ ] webpack
   - [ ] webpack-dev-server
   - [ ] extract-text-webpack-plugin
+  - [ ] Bootstrap v4
 - [ ] Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (contributions are welcome!):
   - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen
