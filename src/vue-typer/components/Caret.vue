@@ -50,6 +50,7 @@ span {
 
 .selecting {
   display: none;
+  background-color: $caret-selecting-color;
 }
 
 .erasing {
@@ -58,5 +59,6 @@ span {
 
 .complete {
   display: none;
+  background-color: $caret-complete-color;
 }
 </style>
