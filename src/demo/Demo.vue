@@ -1,128 +1,106 @@
 <template lang='pug'>
-.demo
-  header
-    h1.title
-      vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='400', caret-animation='smooth')
-    .links
-      button Github circle
-      button Documentation / API
-      button Download circle
-    .badges
-      p Github stars(ghbtbs) | latest ver | num downloads | license badge
+app-layout.demo
+  hero-header(slot='header')
 
-  main.container
-    section#playground.row
-      h4.col-xs-12.text-xs-center VueTyper Playground
+  template(slot='main-playground-output')
+    h3.demo-typer-container.row.flex-items-xs-center.flex-items-xs-middle
+      vue-typer.demo-typer(
+        :text='text',
+        :repeat='repeat',
+        :shuffle='shuffle',
+        :initial-action='initialAction',
+        :pre-type-delay='preTypeDelay',
+        :type-delay='typeDelay',
+        :pre-erase-delay='preEraseDelay',
+        :erase-delay='eraseDelay',
+        :erase-style='eraseStyle',
+        :erase-final-text='eraseFinalText',
+        :caret-animation='caretAnimation')
 
-      #output-panel.card.col-xs-12.col-lg-6
-        h3.demo-typer-container.row.flex-items-xs-center.flex-items-xs-middle
-          vue-typer.demo-typer(
-            :text='text',
-            :repeat='repeat',
-            :shuffle='shuffle',
-            :initial-action='initialAction',
-            :pre-type-delay='preTypeDelay',
-            :type-delay='typeDelay',
-            :pre-erase-delay='preEraseDelay',
-            :erase-delay='eraseDelay',
-            :erase-style='eraseStyle',
-            :erase-final-text='eraseFinalText',
-            :caret-animation='caretAnimation')
+  template(slot='main-playground-text')
+    .form-group
+      label(for='text') List of words to type:
+      textarea(id='text', v-model='textModel', placeholder='text', :rows='3')
 
-      #text-panel.card.col-xs-12.col-lg-6
-        .form-group
-          label(for='text') List of words to type:
-          textarea(id='text', v-model='textModel', placeholder='text', :rows='3')
+  template(slot='main-playground-config')
+    .row
+      #general-config.col-xs-12.col-lg-6
+        form-input(v-model='repeatModel', label='repeat')
+        form-check(v-model='shuffle', label='shuffle')
+        form-check.shrink-text(v-model='eraseFinalText', label='eraseOnComplete')
+        form-radio(v-model='initialAction', :model='initialAction', label='initialAction',
+          :options='["typing", "erasing"]')
 
-      #config-panel.card.col-xs-12.col-lg-6
-        .row
-          #general-config.col-xs-12.col-lg-6
-            form-input(v-model='repeatModel', label='repeat')
-            form-check(v-model='shuffle', label='shuffle')
-            form-check.shrink-text(v-model='eraseFinalText', label='eraseOnComplete')
-            form-radio(v-model='initialAction', :model='initialAction', label='initialAction',
-              :options='["typing", "erasing"]')
+      #delay-config.col-xs-12.col-lg-6
+        form-input(v-model.number='preTypeDelay', label='preTypeDelay', type='number')
+        form-input(v-model.number='typeDelay', label='typeDelay', type='number')
+        form-input(v-model.number='preEraseDelay', label='preEraseDelay', type='number')
+        form-input(v-model.number='eraseDelay', label='eraseDelay', type='number')
 
-          #delay-config.col-xs-12.col-lg-6
-            form-input(v-model.number='preTypeDelay', label='preTypeDelay', type='number')
-            form-input(v-model.number='typeDelay', label='typeDelay', type='number')
-            form-input(v-model.number='preEraseDelay', label='preEraseDelay', type='number')
-            form-input(v-model.number='eraseDelay', label='eraseDelay', type='number')
+      #erase-style-config.col-xs-12.col-lg-6
+        form-radio(v-model='eraseStyle', :model='eraseStyle', label='eraseStyle',
+          :options='["backspace", "select-back", "select-all", "clear"]')
 
-          #erase-style-config.col-xs-12.col-lg-6
-            form-radio(v-model='eraseStyle', :model='eraseStyle', label='eraseStyle',
-              :options='["backspace", "select-back", "select-all", "clear"]')
+      #caret-config.col-xs-12.col-lg-6
+        form-radio(v-model='caretAnimation', :model='caretAnimation', label='caretAnimation',
+          :options='["solid", "blink", "smooth", "phase", "expand"]')
 
-          #caret-config.col-xs-12.col-lg-6
-            form-radio(v-model='caretAnimation', :model='caretAnimation', label='caretAnimation',
-              :options='["solid", "blink", "smooth", "phase", "expand"]')
+  template(slot='main-playground-code')
+    code-block(:code='playgroundDemoCode', language='html')
 
-      #code-panel.card.col-xs-12.col-lg-6
-        code-block(:code='playgroundDemoCode', language='html')
+  template(slot='style-showcase-panel-1')
+    h4.text-xs-center
+      vue-typer.state-typer(
+        text='Katniss Everdeen',
+        :pre-type-delay='1000',
+        :type-delay='160',
+        :pre-erase-delay='2000',
+        :erase-delay='80',
+        erase-style='select-back',
+        caret-animation='solid'
+      )
+    code-block(:code='stateDemoStyleCode', language='css')
 
-    section#style-showcase.row
-      h4.col-xs-12.text-xs-center VueTyper is also fully stylable with CSS!
-      p.col-xs-12.text-xs-center Here are some examples. See the documentationTODOLINK for details.
-      .col-xs
-        .row
-          #state-demo-panel.card.col-xs-12.col-lg-4
-            h4.text-xs-center
-              vue-typer.state-typer(
-                text='Katniss Everdeen',
-                :pre-type-delay='70',
-                :type-delay='160',
-                :pre-erase-delay='2000',
-                :erase-delay='80',
-                erase-style='select-back',
-                caret-animation='solid'
-              )
-            code-block(:code='stateDemoStyleCode', language='css')
-          #code-demo-panel.card.col-xs-12.col-lg-4
-            h4.text-xs-center
-              vue-typer.code-typer(
-                text='Katniss Everdeen',
-                :pre-type-delay='70',
-                :type-delay='160',
-                :pre-erase-delay='2000',
-                :erase-delay='1280',
-                erase-style='select-all',
-                caret-animation='solid'
-              )
-            code-block(:code='codeDemoStyleCode', language='css')
-          #ghost-demo-panel.card.col-xs-12.col-lg-4
-            h4.card-title.text-xs-center
-              vue-typer.ghost-typer(
-                text='Katniss Everdeen',
-                :pre-type-delay='70',
-                :type-delay='160',
-                :pre-erase-delay='2000',
-                :erase-delay='80',
-                erase-style='select-back'
-              )
-            code-block(:code='ghostDemoStyleCode', language='css')
+  template(slot='style-showcase-panel-2')
+    h4.text-xs-center
+      vue-typer.code-typer(
+        text='Katniss Everdeen',
+        :pre-type-delay='1000',
+        :type-delay='160',
+        :pre-erase-delay='2000',
+        :erase-delay='1280',
+        erase-style='select-all',
+        caret-animation='blink'
+      )
+    code-block(:code='codeDemoStyleCode', language='css')
 
-  footer
-    small
-      | Released under the #[a(href='https://opensource.org/licenses/MIT') MIT License]
-      br
-      | Copyright &copy; 2016-#{new Date().getFullYear()} Chris Nguyen
+  template(slot='style-showcase-panel-3')
+    h4.card-title.text-xs-center
+      vue-typer.ghost-typer(
+        text='Katniss Everdeen',
+        :pre-type-delay='1000',
+        :type-delay='160',
+        :pre-erase-delay='2000',
+        :erase-delay='80',
+        erase-style='select-back'
+      )
+    code-block(:code='ghostDemoStyleCode', language='css')
+
+  copyright-footer(slot='footer')
 </template>
 
 <script>
 import { VueTyper } from '../vue-typer'
+import AppLayout from './components/AppLayout'
+import HeroHeader from './components/HeroHeader'
+import CopyrightFooter from './components/CopyrightFooter'
 import FormCheck from './components/FormCheck'
 import FormInput from './components/FormInput'
 import FormRadio from './components/FormRadio'
 import CodeBlock from './components/CodeBlock'
 
 export default {
-  components: {
-    VueTyper,
-    FormCheck,
-    FormInput,
-    FormRadio,
-    CodeBlock
-  },
+  components: { VueTyper, AppLayout, HeroHeader, CopyrightFooter, FormCheck, FormInput, FormRadio, CodeBlock },
   data() {
     return {
       textModel: ['Arya Stark', 'Jon Snow', 'Daenerys Targaryen', 'Melisandre', 'Tyrion Lannister'].join('\n'),
@@ -153,26 +131,22 @@ export default {
           :text='${printableTextArray}'
           :repeat='${this.repeat}'
           :shuffle='${this.shuffle}'
-          :initial-action='${this.initialAction}'
+          initial-action='${this.initialAction}'
           :pre-type-delay='${this.preTypeDelay}'
           :type-delay='${this.typeDelay}'
           :pre-erase-delay='${this.preEraseDelay}'
           :erase-delay='${this.eraseDelay}'
-          :erase-style='${this.eraseStyle}'
+          erase-style='${this.eraseStyle}'
           :erase-final-text='${this.eraseFinalText}'
-          :caret-animation='${this.caretAnimation}'
+          caret-animation='${this.caretAnimation}'
         ></vue-typer>
       `
     },
     stateDemoStyleCode() {
       return `
         @keyframes rocking {
-          0%, 100% {
-            transform: rotateZ(-10deg);
-          },
-          50% {
-            transform: rotateZ(10deg);
-          }
+          0%,100% {transform: rotateZ(-10deg);},
+          50%     {transform: rotateZ(10deg);}
         }
 
         .vue-typer {
@@ -201,35 +175,38 @@ export default {
       return `
         .vue-typer {
           font-family: monospace;
-          background-color: #1E1E1E;
         }
 
-        .vue-typer .custom.char.typed {
+        .vue-typer .custom.char {
           color: #D4D4BD;
+          background-color: #1E1E1E;
         }
         .vue-typer .custom.char.selected {
-          color: #D4D4BD;
           background-color: #264F78;
+        }
+
+        .vue-typer .custom.caret {
+          width: 10px;
+          background-color: #3F51B5;
         }
       `
     },
     ghostDemoStyleCode() {
       return `
-        .ghost-typer {
+        .vue-typer {
           font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
         }
 
-        .ghost-typer .custom.char.typed {
+        .vue-typer .custom.char.typed {
           color: #607D8B;
         }
-
-        .ghost-typer .custom.char.selected {
+        .vue-typer .custom.char.selected {
           color: #607D8B;
           background-color: transparent;
           text-decoration: line-through;
         }
 
-        .ghost-typer .custom.caret {
+        .vue-typer .custom.caret {
           display: none;
         }
       `
@@ -238,175 +215,93 @@ export default {
 }
 </script>
 
-
 <style scoped lang='scss'>
-@import 'colors';
-
-$section-vertical-spacer: 50px;
-
 .demo {
-  header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    color: white;
-    background: $vue-blue;
-
-    .title {
-
-    }
-    .links {
-
-    }
-    .badges {
-
+  #output-panel {
+    .demo-typer-container {
+      height: 100%;
     }
   }
 
-  main {
-    margin-top: $section-vertical-spacer;
-    margin-bottom: $section-vertical-spacer * 2;
-
-    #playground {
-      margin-bottom: $section-vertical-spacer;
-
-      #output-panel {
-        .demo-typer-container {
-          height: 100%;
-        }
-      }
-      #text-panel {
-        .form-group {
-          margin-bottom: initial;
-
-          textarea {
-            width: 100%;
-          }
-        }
-      }
-
-      .shrink-text {
-       font-size: 0.9rem;
-      }
-    }
-
-    .card {
-      padding: 15px;
+  #text-panel {
+    .form-group {
       margin-bottom: initial;
-    }
 
-    h4 {
-      height: 1.1em;
-      margin-bottom: 20px;
+      textarea {
+        width: 100%;
+      }
     }
   }
 
-  footer {
-    color: white;
-    background: $vue-green;
-    text-align: center;
-
-    a {
-      color: white;
-      font-weight: 700;
-      text-decoration: none;
-    }
+  .shrink-text {
+    font-size: 0.9rem;
   }
 }
 </style>
 
 <style lang='scss'>
-header {
-  .title-typer {
-    font-weight: 300;
-
-    .custom.char {
-      color: white;
-    }
-    .custom.caret {
-      background-color: white;
-      &.complete {
-        display: inline-block;
-      }
-    }
-  }
-}
-
 @keyframes rocking {
-	0%, 100% {
-		transform: rotateZ(-10deg);
-	},
-  50% {
-    transform: rotateZ(10deg);
-  }
+  0%, 100% { transform: rotateZ(-10deg); },
+  50%      { transform: rotateZ(10deg); }
 }
 
 main {
-  #style-showcase {
-    #state-demo-panel {
-      .state-typer {
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  .state-typer {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 
-        .custom.char {
-          &.typed {
-            color: #009688;
-          }
-          &.selected {
-            color: #E91E63;
-          }
-        }
-
-        .custom.caret {
-          animation: rocking 1s ease-in-out 0s infinite;
-
-          &.typing {
-            background-color: #009688;
-          }
-          &.selecting {
-            display: inline-block;
-            background-color: #E91E63;
-          }
-        }
+    .custom.char {
+      &.typed {
+        color: #009688;
+      }
+      &.selected {
+        color: #E91E63;
       }
     }
+    .custom.caret {
+      animation: rocking 1s ease-in-out 0s infinite;
 
-    #code-demo-panel {
-      .code-typer {
-        font-family: monospace;
-        background-color: #1E1E1E;
-
-        .custom.char {
-          &.typed {
-            color: #D4D4BD;
-          }
-          &.selected {
-            color: #D4D4BD;
-            background-color: #264F78;
-          }
-        }
+      &.typing {
+        background-color: #009688;
+      }
+      &.selecting {
+        display: inline-block;
+        background-color: #E91E63;
       }
     }
+  }
 
-    #ghost-demo-panel {
-      .ghost-typer {
-        font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  .code-typer {
+    font-family: monospace;
 
-        .custom.char {
-          &.typed {
-            color: #607D8B;
-          }
-          &.selected {
-            color: #607D8B;
-            background-color: transparent;
-            text-decoration: line-through;
-          }
-        }
+    .custom.char {
+      color: #D4D4BD;
+      background-color: #1E1E1E;
 
-        .custom.caret {
-          display: none;
-        }
+      &.selected {
+        background-color: #264F78;
       }
+    }
+    .custom.caret {
+      width: 10px;
+      background-color: #3F51B5;
+    }
+  }
+
+  .ghost-typer {
+    font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+
+    .custom.char {
+      &.typed {
+        color: #607D8B;
+      }
+      &.selected {
+        color: #607D8B;
+        background-color: transparent;
+        text-decoration: line-through;
+      }
+    }
+    .custom.caret {
+      display: none;
     }
   }
 }
@@ -414,8 +309,6 @@ main {
 /* TODO: Include in README */
 .vue-typer {
   font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  user-select: none;
-  cursor: default;
 
   // .custom.char {
   //   color: purple;
