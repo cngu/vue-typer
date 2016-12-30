@@ -58,25 +58,48 @@
               :options='["solid", "blink", "smooth", "phase", "expand"]')
 
       #code-panel.card.col-xs-12.col-lg-6
-        | TODO: CODE PANEL HERE
+        code-block(:code='playgroundDemoCode', language='html')
 
     section#style-showcase.row
       h4.col-xs-12.text-xs-center VueTyper is also fully stylable with CSS!
       p.col-xs-12.text-xs-center Here are some examples. See the documentationTODOLINK for details.
       .col-xs
         .row
-          #color-demo-panel.card.col-xs-12.col-lg
+          #state-demo-panel.card.col-xs-12.col-lg-4
             h4.text-xs-center
-              vue-typer.code-typer(text='Katniss Everdeen', caret-animation='blink')
-            | #[br]CSS HERE
-          #text-caret-demo-panel.card.col-xs-12.col-lg
+              vue-typer.state-typer(
+                text='Katniss Everdeen',
+                :pre-type-delay='70',
+                :type-delay='160',
+                :pre-erase-delay='2000',
+                :erase-delay='80',
+                erase-style='select-back',
+                caret-animation='solid'
+              )
+            code-block(:code='stateDemoStyleCode', language='css')
+          #code-demo-panel.card.col-xs-12.col-lg-4
+            h4.text-xs-center
+              vue-typer.code-typer(
+                text='Katniss Everdeen',
+                :pre-type-delay='70',
+                :type-delay='160',
+                :pre-erase-delay='2000',
+                :erase-delay='1280',
+                erase-style='select-all',
+                caret-animation='solid'
+              )
+            code-block(:code='codeDemoStyleCode', language='css')
+          #ghost-demo-panel.card.col-xs-12.col-lg-4
             h4.card-title.text-xs-center
-              vue-typer.strikethrough-typer(text='Katniss Everdeen')
-            | #[br]CSS HERE
-          #state-demo-panel.card.col-xs-12.col-lg
-            h4.text-xs-center
-              vue-typer.state-typer(text='Katniss Everdeen', caret-animation='solid')
-            | #[br]CSS HERE
+              vue-typer.ghost-typer(
+                text='Katniss Everdeen',
+                :pre-type-delay='70',
+                :type-delay='160',
+                :pre-erase-delay='2000',
+                :erase-delay='80',
+                erase-style='select-back'
+              )
+            code-block(:code='ghostDemoStyleCode', language='css')
 
   footer
     small
@@ -90,13 +113,15 @@ import { VueTyper } from '../vue-typer'
 import FormCheck from './components/FormCheck'
 import FormInput from './components/FormInput'
 import FormRadio from './components/FormRadio'
+import CodeBlock from './components/CodeBlock'
 
 export default {
   components: {
     VueTyper,
     FormCheck,
     FormInput,
-    FormRadio
+    FormRadio,
+    CodeBlock
   },
   data() {
     return {
@@ -120,6 +145,94 @@ export default {
     repeat() {
       const repeatValue = parseInt(this.repeatModel)
       return Number.isNaN(repeatValue) ? Infinity : repeatValue
+    },
+    playgroundDemoCode() {
+      const printableTextArray = '[' + this.text.map(word => `"${word}"`) + ']'
+      return `
+        <vue-typer
+          :text='${printableTextArray}'
+          :repeat='${this.repeat}'
+          :shuffle='${this.shuffle}'
+          :initial-action='${this.initialAction}'
+          :pre-type-delay='${this.preTypeDelay}'
+          :type-delay='${this.typeDelay}'
+          :pre-erase-delay='${this.preEraseDelay}'
+          :erase-delay='${this.eraseDelay}'
+          :erase-style='${this.eraseStyle}'
+          :erase-final-text='${this.eraseFinalText}'
+          :caret-animation='${this.caretAnimation}'
+        ></vue-typer>
+      `
+    },
+    stateDemoStyleCode() {
+      return `
+        @keyframes rocking {
+          0%, 100% {
+            transform: rotateZ(-10deg);
+          },
+          50% {
+            transform: rotateZ(10deg);
+          }
+        }
+
+        .vue-typer {
+          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
+        .vue-typer .custom.char.typed {
+          color: #009688;
+        }
+        .vue-typer .custom.char.selected {
+          color: #E91E63;
+        }
+
+        .vue-typer .custom.caret {
+          animation: rocking 1s ease-in-out 0s infinite;
+        }
+        .vue-typer .custom.caret.typing {
+          background-color: #009688;
+        }
+        .vue-typer .custom.caret.selecting {
+          display: inline-block;
+          background-color: #E91E63;
+        }
+      `
+    },
+    codeDemoStyleCode() {
+      return `
+        .vue-typer {
+          font-family: monospace;
+          background-color: #1E1E1E;
+        }
+
+        .vue-typer .custom.char.typed {
+          color: #D4D4BD;
+        }
+        .vue-typer .custom.char.selected {
+          color: #D4D4BD;
+          background-color: #264F78;
+        }
+      `
+    },
+    ghostDemoStyleCode() {
+      return `
+        .ghost-typer {
+          font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+        }
+
+        .ghost-typer .custom.char.typed {
+          color: #607D8B;
+        }
+
+        .ghost-typer .custom.char.selected {
+          color: #607D8B;
+          background-color: transparent;
+          text-decoration: line-through;
+        }
+
+        .ghost-typer .custom.caret {
+          display: none;
+        }
+      `
     }
   }
 }
@@ -172,6 +285,7 @@ $section-vertical-spacer: 50px;
           }
         }
       }
+
       .shrink-text {
        font-size: 0.9rem;
       }
@@ -183,6 +297,7 @@ $section-vertical-spacer: 50px;
     }
 
     h4 {
+      height: 1.1em;
       margin-bottom: 20px;
     }
   }
@@ -218,26 +333,82 @@ header {
   }
 }
 
-@keyframes test-expand {
-	0%,
-	20% {
-		transform: scaleY(1);
-	}
-	80%,
-	100% {
-		transform: scaleY(0);
-	}
+@keyframes rocking {
+	0%, 100% {
+		transform: rotateZ(-10deg);
+	},
+  50% {
+    transform: rotateZ(10deg);
+  }
 }
 
-@keyframes test-smooth {
-	0%,
-	20% {
-		opacity: 1;
-	}
-	60%,
-	100% {
-		opacity: 0;
-	}
+main {
+  #style-showcase {
+    #state-demo-panel {
+      .state-typer {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+        .custom.char {
+          &.typed {
+            color: #009688;
+          }
+          &.selected {
+            color: #E91E63;
+          }
+        }
+
+        .custom.caret {
+          animation: rocking 1s ease-in-out 0s infinite;
+
+          &.typing {
+            background-color: #009688;
+          }
+          &.selecting {
+            display: inline-block;
+            background-color: #E91E63;
+          }
+        }
+      }
+    }
+
+    #code-demo-panel {
+      .code-typer {
+        font-family: monospace;
+        background-color: #1E1E1E;
+
+        .custom.char {
+          &.typed {
+            color: #D4D4BD;
+          }
+          &.selected {
+            color: #D4D4BD;
+            background-color: #264F78;
+          }
+        }
+      }
+    }
+
+    #ghost-demo-panel {
+      .ghost-typer {
+        font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+
+        .custom.char {
+          &.typed {
+            color: #607D8B;
+          }
+          &.selected {
+            color: #607D8B;
+            background-color: transparent;
+            text-decoration: line-through;
+          }
+        }
+
+        .custom.caret {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 /* TODO: Include in README */
