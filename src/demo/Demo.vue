@@ -37,103 +37,25 @@
       #config-panel.card.col-xs-12.col-lg-6
         .row
           #general-config.col-xs-12.col-lg-6
-            .form-group.row.flex-items-xs-center
-              label.col-form-label.col-xs-4.col-lg-4(for='repeat') repeat
-              .col-xs-4.col-lg-8
-                input.form-control(id='repeat', :min='0', v-model='repeatModel')
-
-            .form-group.row.flex-items-xs-center
-              label.col-xs-4.col-lg-6(for='shuffle') shuffle
-              .col-xs-4.col-lg-6
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='checkbox', id='shuffle', v-model='shuffle')
-
-            .form-group.row.flex-items-xs-center
-              label.col-xs-4.col-lg-6.flex-xs-middle.shrink-text(for='eraseFinalText') eraseOnComplete
-              .col-xs-4.col-lg-6
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='checkbox', id='eraseFinalText', v-model='eraseFinalText')
-
-            .form-group.row.flex-items-xs-center
-              label.col-xs-4.col-lg-5 initialAction
-              .col-xs-4.col-lg-7
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', value='typing', v-model='initialAction')
-                    = " typing"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', value='erasing', v-model='initialAction')
-                    = " erasing"
+            form-input(v-model='repeatModel', label='repeat')
+            form-check(v-model='shuffle', label='shuffle')
+            form-check.shrink-text(v-model='eraseFinalText', label='eraseOnComplete')
+            form-radio(v-model='initialAction', :model='initialAction', label='initialAction',
+              :options='["typing", "erasing"]')
 
           #delay-config.col-xs-12.col-lg-6
-            .form-group.row.flex-items-xs-center
-              label.col-form-label.col-xs-4.col-lg-6(for='preTypeDelay') preTypeDelay
-              .col-xs-4.col-lg-6
-                input.form-control(id='preTypeDelay', :min='0', v-model.number='preTypeDelay')
-
-            .form-group.row.flex-items-xs-center
-              label.col-form-label.col-xs-4.col-lg-6(for='typeDelay') typeDelay
-              .col-xs-4.col-lg-6
-                input.form-control(id='typeDelay', :min='0', v-model.number='typeDelay')
-
-            .form-group.row.flex-items-xs-center
-              label.col-form-label.col-xs-4.col-lg-6(for='preEraseDelay') preEraseDelay
-              .col-xs-4.col-lg-6
-                input.form-control(id='preEraseDelay', :min='0', v-model.number='preEraseDelay')
-
-            .form-group.row.flex-items-xs-center
-              label.col-form-label.col-xs-4.col-lg-6(for='eraseDelay') eraseDelay
-              .col-xs-4.col-lg-6
-                input.form-control(id='eraseDelay', :min='0', v-model.number='eraseDelay')
+            form-input(v-model.number='preTypeDelay', label='preTypeDelay', type='number')
+            form-input(v-model.number='typeDelay', label='typeDelay', type='number')
+            form-input(v-model.number='preEraseDelay', label='preEraseDelay', type='number')
+            form-input(v-model.number='eraseDelay', label='eraseDelay', type='number')
 
           #erase-style-config.col-xs-12.col-lg-6
-            .form-group.row.flex-items-xs-center
-              label.col-xs-4.col-lg-5 eraseStyle
-              .col-xs-4.col-lg-7
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='backspace', value='backspace', v-model='eraseStyle')
-                    = " backspace"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='select-back', value='select-back', v-model='eraseStyle')
-                    = " select-back"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='select-all', value='select-all', v-model='eraseStyle')
-                    = " select-all"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='clear', value='clear', v-model='eraseStyle')
-                    = " clear"
+            form-radio(v-model='eraseStyle', :model='eraseStyle', label='eraseStyle',
+              :options='["backspace", "select-back", "select-all", "clear"]')
 
           #caret-config.col-xs-12.col-lg-6
-            .form-group.row.flex-items-xs-center
-              label.col-xs-4.col-lg-6 caretAnimation
-              .col-xs-4.col-lg-6
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='solid', value='solid', v-model='caretAnimation')
-                    = " solid"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='blink', value='blink', v-model='caretAnimation')
-                    = " blink"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='smooth', value='smooth', v-model='caretAnimation')
-                    = " smooth"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='phase', value='phase', v-model='caretAnimation')
-                    = " phase"
-                .form-check
-                  label.form-check-label
-                    input.form-check-input(type='radio', id='expand', value='expand', v-model='caretAnimation')
-                    = " expand"
+            form-radio(v-model='caretAnimation', :model='caretAnimation', label='caretAnimation',
+              :options='["solid", "blink", "smooth", "phase", "expand"]')
 
       #code-panel.card.col-xs-12.col-lg-6
         | TODO: CODE PANEL HERE
@@ -165,16 +87,20 @@
 
 <script>
 import { VueTyper } from '../vue-typer'
+import FormCheck from './components/FormCheck'
+import FormInput from './components/FormInput'
+import FormRadio from './components/FormRadio'
 
 export default {
   components: {
-    VueTyper
+    VueTyper,
+    FormCheck,
+    FormInput,
+    FormRadio
   },
   data() {
-    const initialText = ['Arya Stark', 'Jon Snow', 'Daenerys Targaryen', 'Melisandre', 'Tyrion Lannister']
-
     return {
-      textModel: initialText.join('\n'),
+      textModel: ['Arya Stark', 'Jon Snow', 'Daenerys Targaryen', 'Melisandre', 'Tyrion Lannister'].join('\n'),
       repeatModel: Infinity,
       shuffle: false,
       initialAction: 'typing',
@@ -244,11 +170,6 @@ $section-vertical-spacer: 50px;
           textarea {
             width: 100%;
           }
-        }
-      }
-      #config-panel {
-        .col-form-label {
-          padding-top: 0.4rem;
         }
       }
       .shrink-text {
