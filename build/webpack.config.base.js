@@ -1,8 +1,8 @@
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var autoprefixer = require('autoprefixer')
-var pathUtil = require('./path-util.js')
-var loaderUtil = require('./loader-util.js')
+var pathUtil = require('./path-util')
+var loaderUtil = require('./loader-util')
 
 const config = {
   output: {
