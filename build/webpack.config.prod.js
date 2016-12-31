@@ -7,7 +7,7 @@ var baseWebpackConfig = require('./webpack.config.base')
 var baseUglifyConfig = require('./uglify.config.base')
 
 var packageJson = require('../package.json')
-var bannerComment = 'vue-typer v' + packageJson.version + '\n© 2016 Chris Nguyen\nReleased under the MIT License.'
+var bannerComment = 'vue-typer v' + packageJson.version + '\nCopyright 2016 Chris Nguyen\nReleased under the MIT License.'
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
