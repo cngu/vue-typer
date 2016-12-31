@@ -21,8 +21,8 @@ export default {
 <style scoped lang='scss'>
 .link-bar {
   img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     padding: 8px;
   }
 }

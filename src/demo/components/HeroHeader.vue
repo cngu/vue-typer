@@ -20,6 +20,7 @@ export default {
 
 <style scoped lang='scss'>
 @import 'colors';
+$verticalSpacing: 2rem;
 
 header {
   display: flex;
@@ -28,9 +29,10 @@ header {
 
   color: white;
   background: $vue-blue;
+  padding: $verticalSpacing 0;
 
-  .badges {
-
+  h1 {
+    margin-bottom: $verticalSpacing;
   }
 }
 </style>
