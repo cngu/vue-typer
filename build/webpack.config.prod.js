@@ -18,7 +18,7 @@ module.exports = merge(baseWebpackConfig, {
     library: 'VueTyper',
     libraryTarget: 'umd'
   },
-  devtool: '#source-map',
+  // devtool: '#source-map',
   plugins: [
      // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.optimize.UglifyJsPlugin(baseUglifyConfig),
