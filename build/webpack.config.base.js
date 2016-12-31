@@ -82,7 +82,7 @@ const config = {
 // Only demo builds require ExtractTextPlugin to allow style caching separately from the bundle.
 // In the production build, we must bundle the CSS along with the code.
 if (process.env.NODE_ENV !== 'production') {
-  config.plugins.push(new ExtractTextPlugin('[name].[contenthash].css'))
+  config.plugins.push(new ExtractTextPlugin('[name].[contenthash].min.css'))
 }
 
 module.exports = config
