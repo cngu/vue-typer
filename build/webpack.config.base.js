@@ -55,6 +55,16 @@ const config = {
         include: pathUtil.getRoot(),
         exclude: /node_modules/,
         loader: loaderUtil.getScssLoader()
+      },
+      {
+        test: /\.png$/,
+        include: pathUtil.getPathFromRoot('src/demo/assets/images'),
+        loader: 'url-loader',
+        options: {
+          name: '[name].[hash].[ext]',
+          limit: 10000,
+          publicPath: pathUtil.getPublicImageAssetPath()
+        }
       }
     ]
   },

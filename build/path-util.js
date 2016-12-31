@@ -10,5 +10,8 @@ module.exports = {
   },
   getLibPath: function(project, libName) {
     return path.join(projectRoot, `src/${project}/lib/${libName}/index.js`)
+  },
+  getPublicImageAssetPath: function() {
+    return process.env.NODE_ENV === 'development' ? '/' : 'dist/'
   }
 }
