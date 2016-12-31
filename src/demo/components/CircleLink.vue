@@ -41,7 +41,7 @@ a {
   }
 
   &:hover:after {
-    transform: scale(0.85);
+    transform: scale(0.8);
     opacity: 0.5;
   }
 }
