@@ -3,17 +3,17 @@ header.jumbotron.jumbotron-fluid
   h1.display-4
     vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='400', caret-animation='smooth')
   link-bar
-  .badges
-    p Github stars(ghbtbs) | latest ver | num downloads | license badge
+  //- badge-bar
 </template>
 
 <script>
 import { VueTyper } from '../../vue-typer'
 import LinkBar from './LinkBar'
+import BadgeBar from './BadgeBar'
 
 export default {
   components: {
-    VueTyper, LinkBar
+    VueTyper, LinkBar, BadgeBar
   }
 }
 </script>
