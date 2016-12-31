@@ -1,7 +1,7 @@
 <template lang='pug'>
 .form-group.row.flex-items-xs-center
-  label.col-xs-4.col-lg-5 {{label}}
-  .col-xs-4.col-lg-7
+  label.col-xs-4.col-md-3.col-lg-6 {{label}}
+  .col-xs-4.col-md-3.col-lg-6
     .form-check(v-for='option of options')
       label.form-check-label
         input.form-check-input(
@@ -30,4 +30,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.col-lg-6 {
+  padding-right: 0;
+}
 </style>

@@ -1,7 +1,7 @@
 <template lang='pug'>
 .form-group.row.flex-items-xs-center
-  label.col-xs-4.col-lg-6.flex-xs-middle(:for='label') {{label}}
-  .col-xs-4.col-lg-6
+  label.col-xs-4.col-md-3.col-lg-6.flex-xs-middle.shift-up(:for='label') {{label}}
+  .col-xs-4.col-md-3.col-lg-6
     .form-check
       label.form-check-label
         input.form-check-input(
@@ -22,4 +22,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.shift-up {
+  margin-top: -2px;
+}
 </style>

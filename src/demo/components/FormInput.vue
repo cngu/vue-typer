@@ -1,7 +1,7 @@
 <template lang='pug'>
 .form-group.row.flex-items-xs-center
-  label.col-form-label.col-xs-4.col-lg-6(:for='label') {{label}}
-  .col-xs-4.col-lg-6
+  label.col-form-label.col-xs-4.col-md-3.col-lg-6(:for='label') {{label}}
+  .col-xs-4.col-md-3.col-lg-6
     input.form-control(
       :id='label',
       :type='type',
