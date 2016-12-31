@@ -6,6 +6,26 @@ TODO
 Link here (also add link to github repo description at the top)
 <p align="center"><img src="" alt="VueTyper demo gif"/></p>
 
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Props](#props)
+  - [text](#text)
+  - [repeat](#repeat)
+  - [shuffle](#shuffle)
+  - [initialAction](#initialaction)
+  - [preTypeDelay](#pretypedelay)
+  - [typeDelay](#typedelay)
+  - [preEraseDelay](#preerasedelay)
+  - [eraseDelay](#erasedelay)
+  - [eraseStyle](#erasestyle)
+  - [eraseOnComplete](#eraseoncomplete)
+  - [caretAnimation](#caretanimation)
+- [Events](#events)
+- [Styles](#styles)
+- [Changelog](#changelog)
+- [TODO](#todo)
+- [License](#license)
+
 ## Getting Started
 
 ### Prerequisites
