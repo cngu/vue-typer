@@ -372,6 +372,8 @@ export default {
 @import 'typer-colors';
 
 span.vue-typer {
+  cursor: default;
+  user-select: none;
   word-break: break-all;
 
   span.char {
