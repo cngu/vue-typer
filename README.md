@@ -115,6 +115,8 @@ To keep the separation of concern between component code and styles, VueTyper ca
 CSS selector format here
 ```
 
+For examples, see (TODO: Link to gh-pages.com#style-showcase)
+
 ## Changelog
 TODO
 
