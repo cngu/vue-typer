@@ -308,7 +308,7 @@ main {
 
 /* TODO: Include in README */
 .vue-typer {
-  font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  // font-family: Dosis, 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
 
   // .custom.char {
   //   color: purple;

@@ -41,6 +41,7 @@ header {
 header {
   h1 {
     .title-typer {
+      font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
       font-weight: 300;
 
       .custom.char {
