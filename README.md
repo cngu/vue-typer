@@ -248,17 +248,65 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
 ## Events
 TODO
 
-#### EventName
-- Event data:
-  - (String) word that finished typing
-```html
-Code sample of attaching event listener in template
-```
-```javascript
-Code sample of event handler function
-```
+#### `typed`
+- **Event data**:
+  - (String typedString)
+- **Usage**:
+  ```html
+  <vue-typer text='watermelon' @typed='onTyped'></vue-typer>
+  ```
+  ```javascript
+  {
+    ...
+    methods: {
+      onTyped: function(typedString) {
+        // handle typed string
+      }
+    }
+  }
+  ```
+  
+  Emitted everytime VueTyper finishes typing a string.
 
-Emitted when VueTyper has finished typing all words in `text`, `repeat+1` times. If `eraseOnComplete` is enabled, the final string must be erased before this event is emitted.
+#### `erased`
+- **Event data**:
+  - (String erasedString)
+- **Usage**:
+  ```html
+  <vue-typer text='watermelon' @erased='onErased'></vue-typer>
+  ```
+  ```javascript
+  {
+    ...
+    methods: {
+      onErased: function(erasedString) {
+        // handle erased string
+      }
+    }
+  }
+  ```
+  
+  Emitted everytime VueTyper finishes erasing a string.
+
+#### `completed`
+- **Usage**:
+  ```html
+  <vue-typer text='watermelon' @completed='onComplete'></vue-typer>
+  ```
+  ```javascript
+  {
+    ...
+    methods: {
+      onComplete: function() {
+        // handle event when VueTyper has finished all typing/erasing
+      }
+    }
+  }
+  ```
+  
+  Emitted when VueTyper has finished typing all words in [`text`](#text), [`repeat`](#repeat)`+1` times. 
+
+- **Note**: If [`eraseOnComplete`](#eraseOnComplete) is enabled, the final string must be erased before this event is emitted.
 
 ## Styles
 TODO
