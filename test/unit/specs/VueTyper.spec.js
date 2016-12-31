@@ -24,12 +24,12 @@ describe('VueTyper.vue', function() {
     expect(VueTyper.name).to.equal('VueTyper')
   })
 
-  describe('Repeat and EraseFinalText', function() {
+  describe('Repeat and EraseOnComplete', function() {
     // eslint-disable-next-line
     const preTypeDelay = 1, preEraseDelay = 1, typeDelay = 1, eraseDelay = 1
     let vm
-    function createOptions(repeat, eraseFinalText) {
-      return { text: 'a', repeat, eraseFinalText, preTypeDelay, typeDelay, preEraseDelay, eraseDelay }
+    function createOptions(repeat, eraseOnComplete) {
+      return { text: 'a', repeat, eraseOnComplete, preTypeDelay, typeDelay, preEraseDelay, eraseDelay }
     }
 
     it('should not repeat and should not erase final text', function(done) {

@@ -120,7 +120,7 @@ export default {
     /**
      * Flag to erase everything once VueTyper is finished typing. Set to false to leave the last word visible.
      */
-    eraseFinalText: {
+    eraseOnComplete: {
       type: Boolean,
       default: false
     },
@@ -223,7 +223,7 @@ export default {
       } else if (this.initialAction === STATE.ERASING) {
         // This is a special case when we start off in erasing mode. The first text is already considered typed, and
         // it may even be the only text in the spool. So don't jump directly into erasing mode (in-case 'repeat' and
-        // 'eraseFinalText' are configured to false), and instead jump to the "we just finished typing a word" phase.
+        // 'eraseOnComplete' are configured to false), and instead jump to the "we just finished typing a word" phase.
         this.moveCaretToEnd()
         this.onTyped()
       }
@@ -324,7 +324,7 @@ export default {
       this.$emit('typed', this.currentText)
 
       if (this.onLastWord) {
-        if (this.eraseFinalText || this.shouldRepeat) {
+        if (this.eraseOnComplete || this.shouldRepeat) {
           this.startErasing()
         } else {
           this.onComplete()

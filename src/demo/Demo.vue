@@ -14,7 +14,7 @@ app-layout.demo
         :pre-erase-delay='preEraseDelay',
         :erase-delay='eraseDelay',
         :erase-style='eraseStyle',
-        :erase-final-text='eraseFinalText',
+        :erase-on-complete='eraseOnComplete',
         :caret-animation='caretAnimation')
 
   template(slot='main-playground-text')
@@ -27,7 +27,7 @@ app-layout.demo
       #general-config.col-xs-12.col-lg-6
         form-input(v-model='repeatModel', label='repeat')
         form-check(v-model='shuffle', label='shuffle')
-        form-check.shrink-text(v-model='eraseFinalText', label='eraseOnComplete')
+        form-check.shrink-text(v-model='eraseOnComplete', label='eraseOnComplete')
         form-radio(v-model='initialAction', :model='initialAction', label='initialAction',
           :options='["typing", "erasing"]')
 
@@ -112,7 +112,7 @@ export default {
       eraseDelay: 250,
       preEraseDelay: 2000,
       eraseStyle: 'select-all',
-      eraseFinalText: false,
+      eraseOnComplete: false,
       caretAnimation: 'blink'
     }
   },
@@ -137,7 +137,7 @@ export default {
           :pre-erase-delay='${this.preEraseDelay}'
           :erase-delay='${this.eraseDelay}'
           erase-style='${this.eraseStyle}'
-          :erase-final-text='${this.eraseFinalText}'
+          :erase-on-complete='${this.eraseOnComplete}'
           caret-animation='${this.caretAnimation}'
         ></vue-typer>
       `
