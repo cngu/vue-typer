@@ -150,7 +150,7 @@ export default {
         }
 
         .vue-typer {
-          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+          font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
         }
         .vue-typer .custom.char.typed {
           color: #009688;

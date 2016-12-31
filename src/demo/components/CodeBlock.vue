@@ -22,7 +22,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.code)
     this.highlightCode()
   },
   methods: {
