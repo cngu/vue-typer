@@ -84,10 +84,10 @@ You may register VueTyper either globally or locally. [What's the difference? Se
 It may be helpful to play around with these props in the interactive demo(TODO: Link to gh-pages.com#playground)
 
 #### `text`
-- type: `String || Array`
+- **type**: `String || Array`
 - **required**
-- validator: Non-empty
-- Usage:
+- **validator**: Non-empty
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon'></vue-typer>
@@ -95,14 +95,14 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   
   Either a single string, or an ordered list of strings, for VueTyper to type. Strings will not be trimmed.
   
-- Note: Dynamically changing this value after VueTyper has mounted will cause VueTyper to reset itself and start typing from scratch.
-- See also: [`shuffle`](#shuffle)
+- **Note**: Dynamically changing this value after VueTyper has mounted will cause VueTyper to reset itself and start typing from scratch.
+- **See also**: [`shuffle`](#shuffle)
 
 #### `repeat`
-- type: `Number`
-- default: `Infinity`
-- validator: Non-negative
-- Usage:
+- **type**: `Number`
+- **default**: `Infinity`
+- **validator**: Non-negative
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' :repeat='0'></vue-typer>
@@ -110,18 +110,18 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   
   Number of _extra_ times to type `text` after the first time. Setting 0 will type `text` once; 1 will type twice; Infinity will type forever.
 
-- Note: Dynamically changing this value after VueTyper has mounted will cause VueTyper to reset itself and start typing from scratch.
+- **Note**: Dynamically changing this value after VueTyper has mounted will cause VueTyper to reset itself and start typing from scratch.
 
 #### `shuffle`
-- type: `Boolean`
-- default: `false`
-- Usage:
+- **type**: `Boolean`
+- **default**: `false`
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' :shuffle='true'></vue-typer>
   ```
 
-  Randomly shuffles `text` ([using the Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)) before typing it. If `repeat > 0`, `text` will always be shuffled before repeat typings. `text` is **not** shuffled after every word is typed. This implies that:
+  Randomly shuffles `text` ([using the Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)) before typing it. If `repeat > 0`, `text` will always be shuffled before repeated typings. `text` is **not** shuffled after every word is typed. This implies that:
   - all strings in `text` will be typed the same number of times, but just in a shuffled order
   - the frequencies of the order of strings typed will have equal distributions, e.g.: 
     - given `text=['a','b']`, 'ab' will be printed 50% of the time, and 'ba' the other 50%
@@ -130,13 +130,13 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
     1. `text` contains duplicate strings, or
     2. `repeat > 0`, `text` is typed where the last word is W, and the next repeat typing shuffled `text` such that it starts with W.
 
-- Note: Dynamically changing this value after VueTyper has mounted will cause VueTyper to reset itself and start typing from scratch.
+- **Note**: Dynamically changing this value after VueTyper has mounted will cause VueTyper to reset itself and start typing from scratch.
 
 #### `initialAction`
-- type: `String`
-- default: `"typing"`
-- validator: `"typing"` || `"erasing"`
-- Usage:
+- **type**: `String`
+- **default**: `"typing"`
+- **validator**: `"typing"` || `"erasing"`
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' initial-action='erasing'></vue-typer>
@@ -147,10 +147,10 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   `erasing` starts VueTyper off in the "erasing" state; the first string in `text` will already be typed and visible as VueTyper begins to erase.
 
 #### `preTypeDelay`
-- type: `Number`
-- default: `70`
-- validator: Non-negative
-- Usage:
+- **type**: `Number`
+- **default**: `70`
+- **validator**: Non-negative
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' pre-type-delay='1000'></vue-typer>
@@ -161,10 +161,10 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   This is useful to have an idle period to show a blank space for a period of time before VueTyper types the first character.
 
 #### `typeDelay`
-- type: `Number`
-- default: `70`
-- validator: Non-negative
-- Usage:
+- **type**: `Number`
+- **default**: `70`
+- **validator**: Non-negative
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' type-delay='100'></vue-typer>
@@ -172,12 +172,11 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   
   Milliseconds to wait after typing a character, until the next character is typed.
 
-
 #### `preEraseDelay`
-- type: `Number`
-- default: `2000`
-- validator: Non-negative
-- Usage:
+- **type**: `Number`
+- **default**: `2000`
+- **validator**: Non-negative
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' pre-erase-delay='1000'></vue-typer>
@@ -187,12 +186,11 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   
   This is useful to have an idle period that gives users time to read the typed string before it is erased.
 
-
 #### `eraseDelay`
-- type: `Number`
-- default: `250`
-- validator: Non-negative
-- Usage:
+- **type**: `Number`
+- **default**: `250`
+- **validator**: Non-negative
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' erase-delay='250'></vue-typer>
@@ -201,10 +199,10 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   Milliseconds to wait after performing an erase action (i.e. backspace, highlight), until the next erase action can start.
 
 #### `eraseStyle`
-- type: `String`
-- default: `select-all`
-- validator: `"backspace"` || `"select-back"` || `"select-all"` || `"clear"`
-- Usage:
+- **type**: `String`
+- **default**: `select-all`
+- **validator**: `"backspace"` || `"select-back"` || `"select-all"` || `"clear"`
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' erase-style='backspace'></vue-typer>
@@ -219,9 +217,9 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   `clear` immediately erases all characters at once; the typed string simply disappears.
 
 #### `eraseOnComplete`
-- type: `Boolean`
-- default: `false`
-- Usage:
+- **type**: `Boolean`
+- **default**: `false`
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' :erase-on-complete='true'></vue-typer>
@@ -229,13 +227,13 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   
   By default, after VueTyper completes all its typing (i.e. it finishes typing all strings in `text`, `repeat+1` times), the last string typed will not be erased and stay visible. Enabling this flag will tell VueTyper to erase the final string as well.
 
-- Note: Has no effect if `repeat === Infinity`.
+- **Note**: Has no effect if `repeat === Infinity`.
 
 #### `caretAnimation`
-- type: `Boolean`
-- default: `false`
-- validator: `"solid"` || `"blink"` || `"smooth"` || `"phase"` || `"expand"`
-- Usage:
+- **type**: `Boolean`
+- **default**: `false`
+- **validator**: `"solid"` || `"blink"` || `"smooth"` || `"phase"` || `"expand"`
+- **Usage**:
 
   ```html
   <vue-typer text='watermelon' caret-animation='smooth'></vue-typer>
@@ -243,9 +241,9 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
   
   Specifies a built-in caret animation to use, similar to Sublime and VS Code animations.
 
-- Note: Alternatively, custom animations can be applied via CSS. 
+- **Note**: Alternatively, custom animations can be applied via CSS. 
 
-- See also: [Styles](#Styles), Example CSS Styles (TODO: Link to gh-pages.com#style-showcase)
+- **See also**: [Styles](#Styles), Example CSS Styles (TODO: Link to gh-pages.com#style-showcase)
 
 ## Events
 TODO
