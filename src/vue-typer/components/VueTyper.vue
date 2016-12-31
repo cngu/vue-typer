@@ -49,7 +49,7 @@ export default {
     },
     /**
      * Number of extra times to type 'text' after the first time.
-     * 0 will type 'text' once, 1 will type three times, Infinity will type forever.
+     * 0 will type 'text' once, 1 will type twice, Infinity will type forever.
      */
     repeat: {
       type: Number,
@@ -99,7 +99,7 @@ export default {
     },
     /**
      * Milliseconds to wait after performing an erase action (backspace, highlight, etc.),
-     * until the next eraswe action can start.
+     * until the next erase action can start.
      */
     eraseDelay: {
       type: Number,
