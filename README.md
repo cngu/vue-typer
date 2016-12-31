@@ -306,18 +306,74 @@ TODO
   
   Emitted when VueTyper has finished typing all words in [`text`](#text), [`repeat`](#repeat)`+1` times. 
 
-- **Note**: If [`eraseOnComplete`](#eraseOnComplete) is enabled, the final string must be erased before this event is emitted.
+- **Note**: If [`eraseOnComplete`](#eraseoncomplete) is enabled, the final string must be erased before this event is emitted.
 
 ## Styles
 TODO
 
-To keep the separation of concern between component code and styles, VueTyper can be fully styled through CSS (as opposed to props):
+To keep the separation of concern between component code and styles, VueTyper can be fully styled through CSS (as opposed to props).
 
-```css
-CSS selector format here
-```
+The following is a selector structure to override the style of each component of VueTyper. 
 
-For examples, see (TODO: Link to gh-pages.com#style-showcase)
+- **Usage**:
+  ```css
+  /* SCSS */
+  .vue-typer {
+    /* Styles for the vue-typer container
+       e.g. font-family, font-size  */
+
+    .custom.char {
+      /* Styles for each character
+         e.g. color, background-color */
+
+      &.typed {
+        /* Styles specific to typed characters
+           i.e. characters to the left of the caret */
+      }
+      &.selected {
+        /* Styles specific to selected characters
+           i.e. characters to the right of the caret while VueTyper's 
+                'eraseStyle' is set to a selection-based style */
+      }
+      &.erased {
+        /* Styles specific to erased characters
+           i.e. characters to the right of the caret while VueTyper's 
+                'eraseStyle' is set to a non-selection-based style */
+      }
+    }
+
+    .custom.caret {
+      /* Styles for the caret
+         e.g. background-color, animation, display */
+
+      &.idle {
+        /* Styles for the caret when it is idle (but VueTyper has not yet completed)
+           i.e. before a string is typed (during 'preTypeDelay') and
+                before a string is erased (during 'preEraseDelay') */
+      }
+      &.typing {
+        /* Styles for the caret while VueTyper is typing
+           i.e. when the caret is moving forwards */
+      }
+      &.selecting {
+        /* Styles for the caret while VueTyper is selecting
+           i.e. when the caret is moving backwards and 'eraseStyle' is
+           set to a selection-based style */
+      }
+      &.erasing {
+        /* Styles for the caret while VueTyper is erasing
+           i.e. when the caret is moving backwards and 'eraseStyle' is
+           set to a non-selection-based style */
+      }
+      &.complete {
+        /* Styles for the idle caret when VueTyper has finished all typing/erasing */
+      }
+    }
+  }
+  ```
+ 
+- **Note**: Some of the default styles above make things hidden using `display: none;`. If you wish to make it visible again, use `display: inline-block;`. Do not use `block`.
+- **See also**: Examples (TODO: Link to gh-pages.com#style-showcase)
 
 ## Changelog
 TODO
