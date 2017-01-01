@@ -1,10 +1,11 @@
 # vue-typer
 <p align="center">
   <img src="" alt="VueTyper demo gif"/>
-  <br>
+  <br><br>
   Vue component that simulates a user typing, selecting, and erasing text.
-  <br>
-  <a href="https://cngu.github.io/vue-typer"><strong>Demo</strong></a>
+  <br><br>
+  <a href="https://cngu.github.io/vue-typer"><strong>Play with vue-typer in this interactive demo.</strong></a>
+  <br><br>
 </p>
 
 <p align="center">
