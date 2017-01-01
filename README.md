@@ -1,12 +1,18 @@
 # vue-typer
-Vue component that simulates a user typing, selecting, and erasing text.
+<p align="center">
+  <img src="" alt="VueTyper demo gif"/>
+  <br>
+  Vue component that simulates a user typing, selecting, and erasing text.
+  <br>
+  <a href="https://cngu.github.io/vue-typer"><strong>Demo</strong></a>
+</p>
 
-## Demo
-<!---
-TODO
-Link here (also add link to github repo description at the top)
-<p align="center"><img src="" alt="VueTyper demo gif"/></p>
--->
+<p align="center">
+  <a href="https://www.npmjs.com/package/vue-typer"><img src="https://img.shields.io/npm/dt/vue-typer.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue-typer"><img src="https://img.shields.io/npm/v/vue-typer.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vue-typer"><img src="https://img.shields.io/npm/l/vue-typer.svg" alt="License"></a>
+</p>
+
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Props](#props)
@@ -392,7 +398,7 @@ The following is a selector structure to override the style of each component of
 <!---(TODO: Link to gh-pages.com#style-showcase)-->
 
 ## Changelog
-<!---TODO-->
+Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
 
 ## TODO
 - Update to stable releases of:
