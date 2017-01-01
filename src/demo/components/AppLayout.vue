@@ -19,8 +19,7 @@
         slot(name='main-playground-code')
 
     section#style-showcase.row
-      h4.col-xs-12.text-xs-center VueTyper is also fully stylable with CSS!
-      p.col-xs-12.text-xs-center Here are some examples. See the documentationTODOLINK for details.
+      h4.col-xs-12.text-xs-center VueTyper is also stylable with CSS!
       .col-xs
         .row
           .card.col-xs-12.col-lg-4
