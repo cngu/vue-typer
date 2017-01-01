@@ -1,12 +1,18 @@
-# vue-typer
-Vue component that simulates a user typing, selecting, and erasing text.
+<p align="center">
+  <img src="https://github.com/cngu/vue-typer/blob/develop/src/demo/assets/demo.gif?raw=true" alt="VueTyper demo gif"/>
+  <br><br>
+  Vue component that simulates a user typing, selecting, and erasing text.
+  <br><br>
+  <a href="https://cngu.github.io/vue-typer"><strong>Play with vue-typer in this interactive demo.</strong></a>
+  <br><br>
+</p>
 
-## Demo
-<!---
-TODO
-Link here (also add link to github repo description at the top)
-<p align="center"><img src="" alt="VueTyper demo gif"/></p>
--->
+<p align="center">
+  <a href="https://www.npmjs.com/package/vue-typer"><img src="https://img.shields.io/npm/dt/vue-typer.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue-typer"><img src="https://img.shields.io/npm/v/vue-typer.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vue-typer"><img src="https://img.shields.io/npm/l/vue-typer.svg" alt="License"></a>
+</p>
+
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Props](#props)
@@ -29,7 +35,10 @@ Link here (also add link to github repo description at the top)
 
 ## Getting Started
 ### Prerequisites
-- Vue v2.x ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
+> VueTyper does not have any direct dependencies to any library or framework -- not even to Vue itself! Any required Vue API calls are made through Vue's `this.$*` context methods. This means VueTyper can only execute within a Vue application context, but in exchange, it does not need to pull in Vue (which keeps vue-typer lightweight).
+
+- Vue v2.x
+  - VueTyper has not been tested in Vue v1.x. ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
 
 ### Installation
 #### npm
@@ -45,7 +54,7 @@ Use this method if you wish to access VueTyper globally via `window.VueTyper`.
 ```
 
 ## Usage
-You may register VueTyper either globally or locally. [What's the difference? See the Vue documentation here.](https://vuejs.org/v2/guide/components.html#Registration)
+After installing VueTyper, you may choose to register it either globally or locally. [What's the difference? See the Vue documentation here.](https://vuejs.org/v2/guide/components.html#Registration)
 
 #### Local Registration
 1. Import the VueTyper component directly from your Vue component file:
@@ -99,8 +108,7 @@ You may register VueTyper either globally or locally. [What's the difference? Se
   ```
 
 ## Props
-It may be helpful to play around with these props in the interactive demo
-<!---(TODO: Link to gh-pages.com#playground)-->
+It may be helpful to play around with these props in the [interactive demo](https://cngu.github.io/vue-typer/#playground).
 
 #### `text`
 - **type**: `String || Array`
@@ -140,10 +148,10 @@ It may be helpful to play around with these props in the interactive demo
   <vue-typer text='watermelon' :shuffle='true'></vue-typer>
   ```
 
-  Randomly shuffles `text` ([using the Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)) before typing it. If `repeat > 0`, `text` will always be shuffled before repeated typings. `text` is **not** shuffled after every word is typed. This implies that:
+  Randomly shuffles `text` ([using the Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)) before typing it. If `repeat > 0`, `text` will always be shuffled before repeated typings. `text` is _not_ shuffled after every word is typed. This implies that:
   - all strings in `text` will be typed the same number of times, but just in a shuffled order
   - the frequencies of the order of strings typed will have equal distributions, e.g.: 
-    - given `text=['a','b']`, 'ab' will be printed 50% of the time, and 'ba' the other 50%
+    - given `text=['a','b']`, a,b will be printed 50% of the time, and b,a the other 50%
     - given `text=['a','b','c']`, there are 3!=6 possible permutations, and they will each be printed 100%/6=16.7% of the time
   - the only scenarios where the same word can be typed twice in a row are when:
     1. `text` contains duplicate strings, or
@@ -163,7 +171,7 @@ It may be helpful to play around with these props in the interactive demo
   
   `typing` starts VueTyper off in the "typing" state; there will be empty space as VueTyper begins to type the first string in `text`.
   
-  `erasing` starts VueTyper off in the "erasing" state; the first string in `text` will already be typed and visible as VueTyper begins to erase.
+  `erasing` starts VueTyper off in the "erasing" state; the first string in `text` will already be typed and visible as VueTyper begins to erase it.
 
 #### `preTypeDelay`
 - **type**: `Number`
@@ -201,7 +209,7 @@ It may be helpful to play around with these props in the interactive demo
   <vue-typer text='watermelon' pre-erase-delay='1000'></vue-typer>
   ```
   
-  Milliseconds to wait after a string in `text` is fully typed, until the first erase action (i.e. backspace, highlight) is performed.
+  Milliseconds to wait after a string is fully typed, until the first erase action (i.e. backspace, highlight) is performed.
   
   This is useful to have an idle period that gives users time to read the typed string before it is erased.
 
@@ -212,14 +220,14 @@ It may be helpful to play around with these props in the interactive demo
 - **Usage**:
 
   ```html
-  <vue-typer text='watermelon' erase-delay='250'></vue-typer>
+  <vue-typer text='watermelon' erase-delay='70'></vue-typer>
   ```
   
   Milliseconds to wait after performing an erase action (i.e. backspace, highlight), until the next erase action can start.
 
 #### `eraseStyle`
 - **type**: `String`
-- **default**: `select-all`
+- **default**: `"select-all"`
 - **validator**: `"backspace"` || `"select-back"` || `"select-all"` || `"clear"`
 - **Usage**:
 
@@ -229,7 +237,7 @@ It may be helpful to play around with these props in the interactive demo
   
   `backspace` erases one character at a time, simulating the backspace key.
   
-  `select-back` highlights backward one character at a time, simulating Shift+LeftArrow, and erases once all characters are highlighted.
+  `select-back` highlights backward one character at a time, simulating Shift+LeftArrow, and erases everything once all characters are highlighted.
   
   `select-all` immediately highlights all characters at once, simulating Ctrl/Cmd+A, and erases all characters afterwards.
 
@@ -244,13 +252,13 @@ It may be helpful to play around with these props in the interactive demo
   <vue-typer text='watermelon' :erase-on-complete='true'></vue-typer>
   ```
   
-  By default, after VueTyper completes all its typing (i.e. it finishes typing all strings in `text`, `repeat+1` times), the last string typed will not be erased and stay visible. Enabling this flag will tell VueTyper to erase the final string as well.
+  By default, after VueTyper completes all its typing (i.e. it finishes typing all strings in `text`, `repeat+1` times), the last typed string will not be erased and stay visible. Enabling this flag will tell VueTyper to erase the final string as well.
 
 - **Note**: Has no effect if `repeat === Infinity`.
 
 #### `caretAnimation`
-- **type**: `Boolean`
-- **default**: `false`
+- **type**: `String`
+- **default**: `"blink"`
 - **validator**: `"solid"` || `"blink"` || `"smooth"` || `"phase"` || `"expand"`
 - **Usage**:
 
@@ -262,12 +270,12 @@ It may be helpful to play around with these props in the interactive demo
 
 - **Note**: Alternatively, custom animations can be applied via CSS. 
 
-- **See also**: [Styles](#Styles), Example CSS Styles <!---(TODO: Link to gh-pages.com#style-showcase)-->
+- **See also**: [Styles](#styles), [Example Custom Caret Animation](https://cngu.github.io/vue-typer#style-showcase)
 
 ## Events
 #### `typed`
 - **Event data**:
-  - (String typedString)
+  - `String` typedString
 - **Usage**:
   ```html
   <vue-typer text='watermelon' @typed='onTyped'></vue-typer>
@@ -287,7 +295,7 @@ It may be helpful to play around with these props in the interactive demo
 
 #### `erased`
 - **Event data**:
-  - (String erasedString)
+  - `String` erasedString
 - **Usage**:
   ```html
   <vue-typer text='watermelon' @erased='onErased'></vue-typer>
@@ -323,12 +331,12 @@ It may be helpful to play around with these props in the interactive demo
   
   Emitted when VueTyper has finished typing all words in [`text`](#text), [`repeat`](#repeat)`+1` times. 
 
-- **Note**: If [`eraseOnComplete`](#eraseoncomplete) is enabled, the final string must be erased before this event is emitted.
+- **Note**: If [`eraseOnComplete`](#eraseoncomplete) is enabled, the final typed string must also be erased before this event is emitted.
 
 ## Styles
 To keep the separation of concern between component code and styles, VueTyper can be fully styled through CSS (as opposed to props).
 
-The following is a selector structure to override the style of each component of VueTyper. 
+The following is a skeleton selector structure to override the style of each component of VueTyper. 
 
 - **Usage**:
   ```css
@@ -363,8 +371,8 @@ The following is a selector structure to override the style of each component of
 
       &.idle {
         /* Styles for the caret when it is idle (but VueTyper has not yet completed)
-           i.e. before a string is typed (during 'preTypeDelay') and
-                before a string is erased (during 'preEraseDelay') */
+           i.e. before a string starts being typed (during 'preTypeDelay') and
+                before a string starts being erased (during 'preEraseDelay') */
       }
       &.typing {
         /* Styles for the caret while VueTyper is typing
@@ -388,18 +396,17 @@ The following is a selector structure to override the style of each component of
   ```
  
 - **Note**: Some of the default styles above make things hidden using `display: none;`. If you wish to make it visible again, use `display: inline-block;`. Do not use `block`.
-- **See also**: Examples 
-<!---(TODO: Link to gh-pages.com#style-showcase)-->
+- **See also**: [CSS Examples](https://cngu.github.io/vue-typer#style-showcase)
 
 ## Changelog
-<!---TODO-->
+Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
 
 ## TODO
 - Update to stable releases of:
   - [ ] webpack
-  - [ ] webpack-dev-server
-  - [ ] extract-text-webpack-plugin
-  - [ ] Bootstrap v4
+  - [ ] webpack-dev-server (for demo app)
+  - [ ] extract-text-webpack-plugin (for demo app)
+  - [ ] Bootstrap v4 (for demo app)
 - [ ] Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (contributions are welcome!):
   - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen

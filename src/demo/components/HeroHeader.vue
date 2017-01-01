@@ -2,8 +2,8 @@
 header.jumbotron.jumbotron-fluid
   h1.display-4
     vue-typer.title-typer(text='VueTyper', :repeat='0', :pre-type-delay='1000', :type-delay='400', caret-animation='smooth')
-  link-bar
-  //- badge-bar
+  link-bar.link-bar
+  badge-bar
 </template>
 
 <script>
@@ -33,6 +33,10 @@ header {
 
   h1 {
     margin-bottom: $verticalSpacing;
+  }
+
+  .link-bar {
+    margin-bottom: $verticalSpacing / 2;
   }
 }
 </style>
