@@ -1,7 +1,7 @@
 <template lang='pug'>
 footer
   small
-    | Released under the #[a(href='https://opensource.org/licenses/MIT') MIT License]
+    | Released under the #[a(href='https://opensource.org/licenses/MIT', target='_blank') MIT License]
     br
     | Copyright &copy; 2016-#{new Date().getFullYear()} Chris Nguyen
 </template>
