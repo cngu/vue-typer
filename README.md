@@ -1,11 +1,12 @@
 # vue-typer
-Vue component that simulates a user typing, selecting, and deleting text.
+Vue component that simulates a user typing, selecting, and erasing text.
 
 ## Demo
+<!---
 TODO
 Link here (also add link to github repo description at the top)
 <p align="center"><img src="" alt="VueTyper demo gif"/></p>
-
+-->
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Props](#props)
@@ -27,21 +28,18 @@ Link here (also add link to github repo description at the top)
 - [License](#license)
 
 ## Getting Started
-
 ### Prerequisites
 - Vue v2.x ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
 
 ### Installation
-TODO:
 #### npm
 Use this method if you wish to import/require VueTyper as a module.
 ```
-npm install --save vue-typer?
+npm install --save vue-typer
 ```
 
 #### CDN
 Use this method if you wish to access VueTyper globally via `window.VueTyper`.
-
 ```html
 <script src="path/to/vue-typer.min.js"></script>
 ```
@@ -101,7 +99,8 @@ You may register VueTyper either globally or locally. [What's the difference? Se
   ```
 
 ## Props
-It may be helpful to play around with these props in the interactive demo(TODO: Link to gh-pages.com#playground)
+It may be helpful to play around with these props in the interactive demo
+<!---(TODO: Link to gh-pages.com#playground)-->
 
 #### `text`
 - **type**: `String || Array`
@@ -263,11 +262,9 @@ It may be helpful to play around with these props in the interactive demo(TODO: 
 
 - **Note**: Alternatively, custom animations can be applied via CSS. 
 
-- **See also**: [Styles](#Styles), Example CSS Styles (TODO: Link to gh-pages.com#style-showcase)
+- **See also**: [Styles](#Styles), Example CSS Styles <!---(TODO: Link to gh-pages.com#style-showcase)-->
 
 ## Events
-TODO
-
 #### `typed`
 - **Event data**:
   - (String typedString)
@@ -329,8 +326,6 @@ TODO
 - **Note**: If [`eraseOnComplete`](#eraseoncomplete) is enabled, the final string must be erased before this event is emitted.
 
 ## Styles
-TODO
-
 To keep the separation of concern between component code and styles, VueTyper can be fully styled through CSS (as opposed to props).
 
 The following is a selector structure to override the style of each component of VueTyper. 
@@ -393,10 +388,11 @@ The following is a selector structure to override the style of each component of
   ```
  
 - **Note**: Some of the default styles above make things hidden using `display: none;`. If you wish to make it visible again, use `display: inline-block;`. Do not use `block`.
-- **See also**: Examples (TODO: Link to gh-pages.com#style-showcase)
+- **See also**: Examples 
+<!---(TODO: Link to gh-pages.com#style-showcase)-->
 
 ## Changelog
-TODO
+<!---TODO-->
 
 ## TODO
 - Update to stable releases of:
