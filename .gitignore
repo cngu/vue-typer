@@ -2,8 +2,5 @@
 .vscode
 node_modules
 *.log
+dist/*.map
 test/**/coverage
-
-# Do not check this in. These will be pushed to gh-pages.
-dist
-index.html
