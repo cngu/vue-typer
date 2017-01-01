@@ -1,0 +1,12 @@
+@import 'colors';
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+
+  body {
+    height: 100%;
+    margin: 0;
+    background: $body-background;
+  }
+}
