@@ -41,7 +41,7 @@ npm install --save vue-typer
 #### CDN
 Use this method if you wish to access VueTyper globally via `window.VueTyper`.
 ```html
-<script src="path/to/vue-typer.min.js"></script>
+<script src="https://unpkg.com/vue-typer/dist/vue-typer.min.js"></script>
 ```
 
 ## Usage
