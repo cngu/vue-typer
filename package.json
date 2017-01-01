@@ -1,7 +1,7 @@
 {
   "name": "vue-typer",
   "version": "1.0.0",
-  "description": "Vue component that simulates a user typing, selecting, and deleting text.",
+  "description": "Vue component that simulates a user typing, selecting, and erasing text.",
   "main": "dist/vue-typer.min.js",
   "files": [
     "dist/vue-typer.min.js"
