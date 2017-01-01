@@ -35,7 +35,10 @@
 
 ## Getting Started
 ### Prerequisites
-- Vue v2.x ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
+> VueTyper does not have any direct dependencies to any library or framework -- not even to Vue itself! Any required Vue API calls are made through Vue's `this.$*` context methods. This means VueTyper can only execute within a Vue application context, but in exchange, it does not need to pull in Vue (which keeps vue-typer lightweight).
+
+- Vue v2.x
+  - VueTyper has not been tested in Vue v1.x. ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
 
 ### Installation
 #### npm
@@ -51,7 +54,7 @@ Use this method if you wish to access VueTyper globally via `window.VueTyper`.
 ```
 
 ## Usage
-After installing VueTyper, you can choose to register it either globally or locally. [What's the difference? See the Vue documentation here.](https://vuejs.org/v2/guide/components.html#Registration)
+After installing VueTyper, you may choose to register it either globally or locally. [What's the difference? See the Vue documentation here.](https://vuejs.org/v2/guide/components.html#Registration)
 
 #### Local Registration
 1. Import the VueTyper component directly from your Vue component file:
@@ -401,9 +404,9 @@ Changes for each release will be documented [here](https://github.com/cngu/vue-t
 ## TODO
 - Update to stable releases of:
   - [ ] webpack
-  - [ ] webpack-dev-server
-  - [ ] extract-text-webpack-plugin
-  - [ ] Bootstrap v4
+  - [ ] webpack-dev-server (for demo app)
+  - [ ] extract-text-webpack-plugin (for demo app)
+  - [ ] Bootstrap v4 (for demo app)
 - [ ] Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (contributions are welcome!):
   - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen
