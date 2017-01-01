@@ -1,10 +1,11 @@
 # vue-typer
 <p align="center">
   <img src="" alt="VueTyper demo gif"/>
-  <br>
+  <br><br>
   Vue component that simulates a user typing, selecting, and erasing text.
-  <br>
-  <a href="https://cngu.github.io/vue-typer"><strong>Demo</strong></a>
+  <br><br>
+  <a href="https://cngu.github.io/vue-typer"><strong>Play with vue-typer in this interactive demo.</strong></a>
+  <br><br>
 </p>
 
 <p align="center">
@@ -105,8 +106,7 @@ You may register VueTyper either globally or locally. [What's the difference? Se
   ```
 
 ## Props
-It may be helpful to play around with these props in the interactive demo
-<!---(TODO: Link to gh-pages.com#playground)-->
+It may be helpful to play around with these props in the [interactive demo](https://cngu.github.io/vue-typer/#playground).
 
 #### `text`
 - **type**: `String || Array`
@@ -268,7 +268,7 @@ It may be helpful to play around with these props in the interactive demo
 
 - **Note**: Alternatively, custom animations can be applied via CSS. 
 
-- **See also**: [Styles](#Styles), Example CSS Styles <!---(TODO: Link to gh-pages.com#style-showcase)-->
+- **See also**: [Styles](#Styles), [Example CSS Styles](https://cngu.github.io/vue-typer#style-showcase)
 
 ## Events
 #### `typed`
