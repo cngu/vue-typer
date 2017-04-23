@@ -4,6 +4,7 @@
   "description": "Vue component that simulates a user typing, selecting, and erasing text.",
   "main": "dist/vue-typer.min.js",
   "files": [
+    "dist/vue-typer.js",
     "dist/vue-typer.min.js"
   ],
   "scripts": {
