@@ -56,7 +56,7 @@
     "eslint-plugin-html": "^1.7.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
-    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.24.1",
     "isparta-loader": "^2.0.0",
@@ -75,15 +75,15 @@
     "pug": "^2.0.0-beta6",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
-    "sinon": "^1.17.6",
+    "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "vue": "^2.1.8",
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "^2.1.6",
-    "webpack": "^2.1.0-beta.28",
-    "webpack-dev-server": "^2.2.0-rc.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.4",
     "webpack-merge": "^1.1.2"
   }
 }

@@ -403,9 +403,9 @@ Changes for each release will be documented [here](https://github.com/cngu/vue-t
 
 ## TODO
 - Update to stable releases of:
-  - [ ] webpack
-  - [ ] webpack-dev-server (for demo app)
-  - [ ] extract-text-webpack-plugin (for demo app)
+  - [x] webpack
+  - [x] webpack-dev-server (for demo app)
+  - [x] extract-text-webpack-plugin (for demo app)
   - [ ] Bootstrap v4 (for demo app)
 - [ ] Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (contributions are welcome!):
