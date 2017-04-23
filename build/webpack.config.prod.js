@@ -14,10 +14,11 @@ var bannerComment = nameAndVersion + '\n' + copyright + '\n' + license
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    'vue-typer': pathUtil.getPathFromRoot('src/vue-typer/index.js')
+    'vue-typer': pathUtil.getPathFromRoot('src/vue-typer/index.js'),
+    'vue-typer.min': pathUtil.getPathFromRoot('src/vue-typer/index.js')
   },
   output: {
-    filename: '[name].min.js',
+    filename: '[name].js',
     library: 'VueTyper',
     libraryTarget: 'umd'
   },

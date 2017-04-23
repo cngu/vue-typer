@@ -1,5 +1,10 @@
 {
   "presets": ["es2015"],
   "plugins": ["transform-runtime"],
-  "comments": false
+  "comments": false,
+  "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  }
 }

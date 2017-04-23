@@ -16,18 +16,16 @@ const config = {
       {
         enforce: 'pre',
         test: /\.(js|vue)$/,
-        include: pathUtil.getRoot(),
-        exclude: /node_modules/,
         loader: 'eslint-loader',
+        include: pathUtil.getPathsFromRoot(['src', 'test']),
         options: {
           formatter: require('eslint-friendly-formatter')
         }
       },
       {
         test: /\.vue$/,
-        include: pathUtil.getRoot(),
-        exclude: /node_modules/,
         loader: 'vue-loader',
+        include: pathUtil.getPathsFromRoot(['src', 'test']),
         options: {
           loaders: {
             css: loaderUtil.getVueCssLoader(),
@@ -40,21 +38,18 @@ const config = {
       },
       {
         test: /\.js$/,
-        include: pathUtil.getRoot(),
-        exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        include: pathUtil.getPathsFromRoot(['src', 'test'])
       },
       {
         test: /\.css$/,
-        include: pathUtil.getRoot(),
-        exclude: /node_modules/,
-        loader: loaderUtil.getCssLoader()
+        loader: loaderUtil.getCssLoader(),
+        include: pathUtil.getPathsFromRoot(['src', 'test'])
       },
       {
         test: /\.scss$/,
-        include: pathUtil.getRoot(),
-        exclude: /node_modules/,
-        loader: loaderUtil.getScssLoader()
+        loader: loaderUtil.getScssLoader(),
+        include: pathUtil.getPathsFromRoot(['src', 'test'])
       },
       {
         test: /\.png$/,
@@ -75,7 +70,7 @@ const config = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }
 

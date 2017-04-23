@@ -13,8 +13,8 @@ module.exports = {
       return `style-loader!${cssLoader}`
     }
     return ExtractTextPlugin.extract({
-      loader: cssLoader,
-      fallbackLoader: 'style-loader'
+      use: cssLoader,
+      fallback: 'style-loader'
     })
   },
   getScssLoader: function() {
@@ -22,8 +22,8 @@ module.exports = {
       return `style-loader!${cssLoader}!${sassLoader}`
     }
     return ExtractTextPlugin.extract({
-      loader: [cssLoader, `${sassLoader}`],
-      fallbackLoader: 'style-loader'
+      use: [cssLoader, `${sassLoader}`],
+      fallback: 'style-loader'
     })
   },
   getVueCssLoader: function() {
@@ -31,8 +31,8 @@ module.exports = {
       return `vue-style-loader!${cssLoader}`
     }
     return ExtractTextPlugin.extract({
-      loader: cssLoader,
-      fallbackLoader: 'vue-style-loader'
+      use: cssLoader,
+      fallback: 'vue-style-loader'
     })
   },
   getVueScssLoader: function() {
@@ -40,7 +40,7 @@ module.exports = {
       return `vue-style-loader!${cssLoader}!${sassLoader}`
     }
     return ExtractTextPlugin.extract({
-      loader: [cssLoader, `${sassLoader}`]
+      use: [cssLoader, `${sassLoader}`]
     })
   }
 }
