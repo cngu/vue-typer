@@ -7,7 +7,9 @@ function validRange(lower, upper) {
 }
 
 /**
- * Returns a random int in the range [min, max], or -1 if:
+ * @param min - Minimum random int
+ * @param max - Maximum random int
+ * @returns a random int in the range [min, max], or -1 if either of the following conditions are met:
  *  - min and/or max are not of type 'number', NaN, or Infinity
  *  - min > max
  */

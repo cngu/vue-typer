@@ -12,6 +12,7 @@ function swap(a, i, j) {
 /**
  * Performs an in-place shuffle.
  * Implemented using the Fisher-Yates/Knuth shuffle algorithm.
+ * @param list - Array of items to shuffle in-place.
  */
 export default (list) => {
   if (!(list instanceof Array)) {
