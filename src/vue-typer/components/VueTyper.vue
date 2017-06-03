@@ -12,6 +12,7 @@ span.vue-typer
 
 <script>
 import Caret from './Caret'
+import shallowEquals from '../utils/shallow-equals'
 import shuffle from '../utils/shuffle'
 
 const STATE = {
@@ -355,7 +356,10 @@ export default {
     }
   },
   watch: {
-    text() {
+    text(newText, oldText) {
+      if (newText === oldText || shallowEquals(newText, oldText)) {
+        return
+      }
       this.reset()
     },
     repeat() {
