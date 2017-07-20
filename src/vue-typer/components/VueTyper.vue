@@ -128,7 +128,14 @@ export default {
     /**
      * Caret animation style. See Caret.vue.
      */
-    caretAnimation: String
+    caretAnimation: String,
+    /**
+     * inform parent component when a char was rendered
+     */
+    emitOnCharTyping: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -265,6 +272,9 @@ export default {
     typeStep() {
       if (!this.isDoneTyping) {
         this.shiftCaret(1)
+        if (this.emitOnCharTyping) {
+          this.$emit('chartyped', this.currentText.charAt(this.currentTextIndex))
+        }
       }
 
       if (this.isDoneTyping) {
