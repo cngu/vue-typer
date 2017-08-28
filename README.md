@@ -34,9 +34,10 @@
 - [License](#license)
 
 ## Getting Started
-### Prerequisites
-> VueTyper does not have any direct dependencies to any library or framework -- not even to Vue itself! Any required Vue API calls are made through Vue's `this.$*` context methods. This means VueTyper can only execute within a Vue application context, but in exchange, it does not need to pull in Vue (which keeps vue-typer lightweight).
 
+> VueTyper has a single dependency to [lodash.split](https://github.com/lodash/lodash/blob/master/split.js) to support emojis and other multi-codepoint Unicode characters. Apart from this, VueTyper does not have any direct dependencies to any other library or framework -- not even to Vue itself! All required Vue API calls are made through Vue's `this.$*` context methods. This means VueTyper can only execute within a Vue application context, but in exchange, it does not need to pull in Vue, which keeps VueTyper lightweight.
+
+### Prerequisites
 - Vue v2.x
   - VueTyper has not been tested in Vue v1.x. ([See here for migration instructions from Vue 1.x to 2.x.](https://vuejs.org/v2/guide/migration.html))
 

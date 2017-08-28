@@ -14,6 +14,7 @@ span.vue-typer
 import Caret from './Caret'
 import shallowEquals from '../utils/shallow-equals'
 import shuffle from '../utils/shuffle'
+import split from 'lodash.split'
 
 const STATE = {
   IDLE: 'idle',
@@ -167,7 +168,7 @@ export default {
       return !!this.eraseStyle.match(`^${ERASE_STYLE.CLEAR}|${ERASE_STYLE.SELECT_ALL}$`)
     },
     isDoneTyping() {
-      return this.currentTextIndex >= this.currentText.length
+      return this.currentTextIndex >= this.currentTextLength
     },
     isDoneErasing() {
       // Selection-based erase styles must stay in the highlight stage for one iteration before erasing is finished.
@@ -189,13 +190,19 @@ export default {
       return ''
     },
     currentTextArray() {
-      return this.currentText.split('')
+      return split(this.currentText, '')
+    },
+    currentTextLength() {
+      // NOTE: Using currentText.length will count each individual codepoint as a
+      // separate character, which is likely not what you want. currentTextLength will
+      // count Unicode characters made up of multiple codepoints as a single character.
+      return this.currentTextArray.length
     },
     numLeftChars() {
       return this.currentTextIndex < 0 ? 0 : this.currentTextIndex
     },
     numRightChars() {
-      return this.currentText.length - this.numLeftChars
+      return this.currentTextLength - this.numLeftChars
     }
   },
   mounted() {
@@ -212,7 +219,7 @@ export default {
       } else {
         // Don't violate one-way binding, make a copy! Vue doesn't make a copy for us to keep things reactive
         let textCopy = this.text.slice()
-        textCopy = textCopy.filter(textToType => textToType.length)
+        textCopy = textCopy.filter(textToType => textToType.length > 0)
         this.spool = textCopy
       }
 
@@ -252,7 +259,7 @@ export default {
     shiftCaret(delta) {
       this.previousTextIndex = this.currentTextIndex
       const newCaretIndex = this.currentTextIndex + delta
-      this.currentTextIndex = Math.min(Math.max(newCaretIndex, 0), this.currentText.length)
+      this.currentTextIndex = Math.min(Math.max(newCaretIndex, 0), this.currentTextLength)
     },
     moveCaretToStart() {
       this.previousTextIndex = this.currentTextIndex
@@ -260,7 +267,7 @@ export default {
     },
     moveCaretToEnd() {
       this.previousTextIndex = this.currentTextIndex
-      this.currentTextIndex = this.currentText.length
+      this.currentTextIndex = this.currentTextLength
     },
     typeStep() {
       if (!this.isDoneTyping) {

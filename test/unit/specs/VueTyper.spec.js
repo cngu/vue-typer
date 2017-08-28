@@ -24,8 +24,46 @@ describe('VueTyper.vue', function() {
     expect(VueTyper.name).to.equal('VueTyper')
   })
 
+  describe('Unicode support', function() {
+    let vm
+
+    function _mount(text) {
+      vm = mount({ text })
+    }
+
+    function assertTextLength(length) {
+      return expect(vm.currentTextLength).to.equal(length)
+    }
+
+    describe('Emojis', function() {
+      const emojiTestData = {
+        '1': ['💙', '⛳', '⛈'],
+        '2': ['❤️', '💩'],
+        '3': ['✍🏻', '🔥'],
+        '4': ['👍🏻', '🤳🏻'],
+        '5': ['💅🏻', '👨‍⚖️'],
+        '7': ['👩🏻‍🎤', '👩🏻‍✈️'],
+        '8': ['👩‍❤️‍👩', '👨‍👩‍👧'],
+        '9': ['👩‍👩‍👦'],
+        '11': ['👩‍❤️‍💋‍👩', '👨‍👩‍👧‍👦']
+      }
+
+      for (let emojiCodepoint in emojiTestData) {
+        describe(`should properly count ${emojiCodepoint} codepoint emojis`, function() {
+          let emojiList = emojiTestData[emojiCodepoint]
+          for (let emoji of emojiList) {
+            it(`${emoji}  has length 1`, function() {
+              _mount(emoji)
+              assertTextLength(1)
+            })
+          }
+        })
+      }
+    })
+  })
+
   describe('Repeat and EraseOnComplete', function() {
-    // eslint-disable-next-line
+    // eslint-disable-next-line one-var
     const preTypeDelay = 1, preEraseDelay = 1, typeDelay = 1, eraseDelay = 1
     let vm
     function createOptions(repeat, eraseOnComplete) {
