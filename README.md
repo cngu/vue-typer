@@ -28,7 +28,11 @@
   - [eraseOnComplete](#eraseoncomplete)
   - [caretAnimation](#caretanimation)
 - [Events](#events)
+  - [typed](#typed)
+  - [erased](#erased)
+  - [completed](#completed)
 - [Styles](#styles)
+- [Contribution Guide](#contribution-guide)
 - [Changelog](#changelog)
 - [TODO](#todo)
 - [License](#license)
@@ -399,6 +403,13 @@ The following is a skeleton selector structure to override the style of each com
 - **Note**: Some of the default styles above make things hidden using `display: none;`. If you wish to make it visible again, use `display: inline-block;`. Do not use `block`.
 - **See also**: [CSS Examples](https://cngu.github.io/vue-typer#style-showcase)
 
+## Contribution Guide
+1. Make all changes on the `develop` branch.
+2. Update the demo page to showcase new APIs or features.
+3. Add unit tests.
+4. Update this README if necessary.
+5. Submit a PR!
+
 ## Changelog
 Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
 
@@ -413,6 +424,7 @@ Changes for each release will be documented [here](https://github.com/cngu/vue-t
   - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen
   - [ ] smarter typing algorithm: erase only up to the longest common starting substring
   - [ ] is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
+  - See submitted [feature requests](https://github.com/cngu/vue-typer/issues?q=is%3Aissue+is%3Aopen+label%3A%22feature+request%22)
 - Vue documentation considers rendering-specific tests to still be 'unit' tests. Should we split this out into 'integration' tests?
 
 ## License
