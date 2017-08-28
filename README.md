@@ -415,6 +415,7 @@ Changes for each release will be documented [here](https://github.com/cngu/vue-t
   - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen
   - [ ] smarter typing algorithm: erase only up to the longest common starting substring
   - [ ] is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
+  - See submitted [feature requests](https://github.com/cngu/vue-typer/issues?q=is%3Aissue+is%3Aopen+label%3A%22feature+request%22)
 - Vue documentation considers rendering-specific tests to still be 'unit' tests. Should we split this out into 'integration' tests?
 
 ## License
