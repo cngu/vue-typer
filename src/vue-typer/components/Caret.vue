@@ -34,7 +34,7 @@ span.caret {
   }
 }
 
-/* Keep the following .custom.caret styles as low-specificity as possible so they are more easily overridden */
+/* Keep the following .caret styles as low-specificity as possible so they are more easily overridden */
 span {
   display: inline-block;
   width: 1px;
