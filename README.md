@@ -32,6 +32,7 @@
   - [erased](#erased)
   - [completed](#completed)
 - [Styles](#styles)
+- [Contribution Guide](#contribution-guide)
 - [Changelog](#changelog)
 - [TODO](#todo)
 - [License](#license)
@@ -400,6 +401,13 @@ The following is a skeleton selector structure to override the style of each com
 
 - **Note**: Some of the default styles above make things hidden using `display: none;`. If you wish to make it visible again, use `display: inline-block;`. Do not use `block`.
 - **See also**: [CSS Examples](https://cngu.github.io/vue-typer#style-showcase)
+
+## Contribution Guide
+1. Make all changes on the `develop` branch.
+2. Update the demo page to showcase new APIs or features.
+3. Add unit tests.
+4. Update this README if necessary.
+5. Submit a PR!
 
 ## Changelog
 Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
