@@ -139,6 +139,7 @@ export default {
   data() {
     return {
       state: STATE.IDLE,
+      nextState: null,
       repeatCounter: 0,
       actionTimeout: 0,
       actionInterval: 0,
@@ -152,8 +153,11 @@ export default {
 
   computed: {
     caretClasses() {
+      const idle = this.state === STATE.IDLE
       return {
-        idle: this.state === STATE.IDLE,
+        idle,
+        'pre-type': idle && this.nextState === STATE.TYPING,
+        'pre-erase': idle && this.nextState === STATE.ERASING,
         typing: this.state === STATE.TYPING,
         selecting: this.state === STATE.ERASING && this.isSelectionBasedEraseStyle,
         erasing: this.state === STATE.ERASING && !this.isSelectionBasedEraseStyle,
@@ -312,6 +316,7 @@ export default {
       this.moveCaretToStart()
 
       this.state = STATE.IDLE
+      this.nextState = STATE.TYPING
       this.actionTimeout = setTimeout(() => {
         this.state = STATE.TYPING
         this.typeStep()
@@ -328,6 +333,7 @@ export default {
       this.moveCaretToEnd()
 
       this.state = STATE.IDLE
+      this.nextState = STATE.ERASING
       this.actionTimeout = setTimeout(() => {
         this.state = STATE.ERASING
         this.eraseStep()
@@ -367,6 +373,7 @@ export default {
     },
     onComplete() {
       this.state = STATE.COMPLETE
+      this.nextState = null
       this.$emit('completed')
     }
   },
