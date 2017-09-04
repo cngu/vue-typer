@@ -414,16 +414,14 @@ The following is a skeleton selector structure to override the style of each com
 Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
 
 ## TODO
-- Update to stable releases of:
-  - [x] webpack
-  - [x] webpack-dev-server (for demo app)
-  - [x] extract-text-webpack-plugin (for demo app)
-  - [ ] Bootstrap v4 (for demo app)
-- [ ] Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
-- Potential features (contributions are welcome!):
-  - [ ] start typing only when VueTyper is on-screen; potentially pause typing when off-screen
-  - [ ] smarter typing algorithm: erase only up to the longest common starting substring
-  - [ ] is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
+- Update to webpack 3
+- Update to Bootstrap v4 (for demo app)
+- Consider marking lodash.split as a webpack external (webpack-node-externals may be overkill?)
+- Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
+- Potential features (pull requests are welcome!):
+  - start typing only when VueTyper is on-screen; potentially pause typing when off-screen
+  - smarter typing algorithm: erase only up to the longest common starting substring
+  - is it worth it to eliminate time-drifting from setInterval? If so, it could be a self-correcting interval (implemented as a series of timeouts)
   - See submitted [feature requests](https://github.com/cngu/vue-typer/issues?q=is%3Aissue+is%3Aopen+label%3A%22feature+request%22)
 - Vue documentation considers rendering-specific tests to still be 'unit' tests. Should we split this out into 'integration' tests?
 
