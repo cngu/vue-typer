@@ -44,7 +44,7 @@ npm run build
 ```bash
 git add dist index.html
 git commit -m "[release] vMAJOR.MINOR.PATCH"
-git tag -a vMAJOR.MINOR.PATCH -m "[release] MAJOR.MINOR.PATCH"
+git tag -a vMAJOR.MINOR.PATCH -m "[release] vMAJOR.MINOR.PATCH"
 ```
 
 10. Publish to npm:
