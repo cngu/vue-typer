@@ -1,6 +1,6 @@
 {
   "name": "vue-typer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Vue component that simulates a user typing, selecting, and erasing text.",
   "main": "dist/vue-typer.min.js",
   "files": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "NODE_ENV='development' webpack-dev-server --config build/webpack.config.dev.js --hot --inline --open --compress",
-    "dev:lan": "npm run dev -- --host 0.0.0.0",
+    "dev:lan": "npm run dev -- --public $(ipconfig getifaddr en0):8080 --host 0.0.0.0",
     "demo": "webpack --config build/webpack.config.demo.js",
     "prod": "NODE_ENV='production' webpack --config build/webpack.config.prod.js",
     "build": "npm run lint && npm run test && npm run clean && npm run demo && npm run prod",
@@ -41,6 +41,9 @@
     "url": "https://github.com/cngu/vue-typer/issues"
   },
   "homepage": "https://github.com/cngu/vue-typer#readme",
+  "dependencies": {
+    "lodash.split": "^4.4.2"
+  },
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.21.0",
