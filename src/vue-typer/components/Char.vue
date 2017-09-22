@@ -27,12 +27,12 @@ export default {
 .char {
   display: inline-block;
   white-space: pre-wrap;
+}
 
-  /* TODO: This can be removed in favor of the ':blank' pseudo-class:
-     https://drafts.csswg.org/selectors-4/#the-blank-pseudo */
-  &.newline {
-    display: inline;
-  }
+/* TODO: This can be removed in favor of the ':blank' pseudo-class:
+   https://drafts.csswg.org/selectors-4/#the-blank-pseudo */
+.newline {
+  display: inline;
 }
 
 /* Keep the following .char styles as low-specificity as possible so they are more easily overridden */
