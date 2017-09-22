@@ -1,17 +1,22 @@
 <template lang='pug'>
-//- Ideally we'd just have span.left and span.right contain all the chars to the left and
-//- right of the caret, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
-//- Until we can find a solution for this, we just create one span per character.
+//-
+  Ideally we'd just have span.left and span.right contain all the chars to the left and
+  right of the caret, but line-wrapping becomes tricky on some browsers (FF/IE/Edge).
+  Until we can find a solution for this, we just create one span per character.
 span.vue-typer
   span.left
-    span.char.custom.typed(v-for='l in numLeftChars') {{ currentTextArray[l-1] }}
+    char.custom.typed(v-for='l in numLeftChars',
+                      :val="currentTextArray[l-1]")
   caret(:class='caretClasses', :animation='caretAnimation')
   span.right
-    span.char.custom(v-for='r in numRightChars', :class='rightCharClasses') {{ currentTextArray[numLeftChars + r-1] }}
+    char.custom(v-for='r in numRightChars',
+                :val="currentTextArray[numLeftChars + r-1]",
+                :class='rightCharClasses')
 </template>
 
 <script>
 import Caret from './Caret'
+import Char from './Char'
 import shallowEquals from '../utils/shallow-equals'
 import shuffle from '../utils/shuffle'
 import split from 'lodash.split'
@@ -32,9 +37,8 @@ const ERASE_STYLE = {
 
 export default {
   name: 'VueTyper',
-  components: {
-    Caret
-  },
+  components: { Caret, Char },
+
   props: {
     /**
      * Text(s) to type.
@@ -131,6 +135,7 @@ export default {
      */
     caretAnimation: String
   },
+
   data() {
     return {
       state: STATE.IDLE,
@@ -144,6 +149,7 @@ export default {
       currentTextIndex: -1
     }
   },
+
   computed: {
     caretClasses() {
       return {
@@ -205,12 +211,14 @@ export default {
       return this.currentTextLength - this.numLeftChars
     }
   },
+
   mounted() {
     this.init()
   },
   beforeDestroy() {
     this.cancelCurrentAction()
   },
+
   methods: {
     init() {
       // Process the 'text' prop into a typing spool
@@ -380,38 +388,12 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import 'typer-colors';
-
 span.vue-typer {
   cursor: default;
   user-select: none;
-  word-break: break-all;
-
-  span.char {
-    white-space: pre-wrap;
-  }
 
   span.left, span.right {
     display: inline;
   }
-}
-
-/* Keep the following .custom.char styles as low-specificity as possible so they are more easily overridden */
-span {
-  display: inline-block;
-}
-
-.typed {
-  color: $char-typed-color;
-  background-color: $char-typed-background-color;
-}
-
-.selected {
-  color: $char-selected-color;
-  background-color: $char-selected-background-color;
-}
-
-.erased {
-  display: none;
 }
 </style>
