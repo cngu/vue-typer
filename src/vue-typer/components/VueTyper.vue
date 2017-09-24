@@ -133,7 +133,7 @@ export default {
     /**
      * Caret animation style. See Caret.vue.
      */
-    caretAnimation: String
+    caretAnimation: String,
   },
 
   data() {
@@ -280,6 +280,7 @@ export default {
     typeStep() {
       if (!this.isDoneTyping) {
         this.shiftCaret(1)
+        this.$emit('typed-char', this.currentText.charAt(this.currentTextIndex))
       }
 
       if (this.isDoneTyping) {
