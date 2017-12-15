@@ -300,7 +300,8 @@ It may be helpful to play around with these props in the [interactive demo](http
 
 #### `typed-char`
 - **Event data**:
-  - `String` lastTypedChar
+  - `String` typedChar
+  - `Number` typedCharIndex
 - **Usage**:
   ```html
   <vue-typer text='watermelon' @typed-char='onTypedChar'></vue-typer>
@@ -309,15 +310,18 @@ It may be helpful to play around with these props in the [interactive demo](http
   {
     ...
     methods: {
-      onTypedChar: function(lastTypedChar) {
-        // handle last typed char
+      onTypedChar: function(typedChar, typedCharIndex) {
+        // handle typed character at the given index
+        // call #1: 'w', 0
+        // call #2: 'a', 1
+        // call #3: 't', 2
+        // ...
       }
     }
   }
   ```
 
-  Emitted after each char which was typed.
-
+  Emitted everytime VueTyper finishes typing a single character.
 
 #### `erased`
 - **Event data**:
