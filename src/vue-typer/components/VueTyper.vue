@@ -133,7 +133,7 @@ export default {
     /**
      * Caret animation style. See Caret.vue.
      */
-    caretAnimation: String,
+    caretAnimation: String
   },
 
   data() {
