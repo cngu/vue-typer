@@ -1,5 +1,5 @@
 /*!
- * vue-typer v1.0.6
+ * vue-typer v1.1.0
  * Copyright 2016-2017 Chris Nguyen
  * Released under the MIT license.
  */
@@ -1044,6 +1044,10 @@ exports.default = {
     typeStep: function typeStep() {
       if (!this.isDoneTyping) {
         this.shiftCaret(1);
+
+        var typedCharIndex = this.previousTextIndex;
+        var typedChar = this.currentTextArray[typedCharIndex];
+        this.$emit('typed-char', typedChar, typedCharIndex);
       }
 
       if (this.isDoneTyping) {

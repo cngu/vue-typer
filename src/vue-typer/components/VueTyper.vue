@@ -189,6 +189,7 @@ export default {
     shouldRepeat() {
       return this.repeatCounter < this.repeat
     },
+
     currentText() {
       if (this.spoolIndex >= 0 && this.spoolIndex < this.spool.length) {
         return this.spool[this.spoolIndex]
@@ -204,6 +205,7 @@ export default {
       // count Unicode characters made up of multiple codepoints as a single character.
       return this.currentTextArray.length
     },
+
     numLeftChars() {
       return this.currentTextIndex < 0 ? 0 : this.currentTextIndex
     },
@@ -280,6 +282,10 @@ export default {
     typeStep() {
       if (!this.isDoneTyping) {
         this.shiftCaret(1)
+
+        const typedCharIndex = this.previousTextIndex
+        const typedChar = this.currentTextArray[typedCharIndex]
+        this.$emit('typed-char', typedChar, typedCharIndex)
       }
 
       if (this.isDoneTyping) {
