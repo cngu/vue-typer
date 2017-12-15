@@ -184,6 +184,25 @@ describe('VueTyper.vue', function() {
     beforeEach(function() {
       vm = mount({ text })
     })
+
+    it('should emit \'typed-char\' event for each char in a typed word', function(done) {
+      let numTyped = 0
+      vm.$on('typed-char', (char, index) => {
+        expect(text.charAt(numTyped)).to.equal(char)
+        expect(numTyped).to.equal(index)
+
+        numTyped++
+        if (numTyped === text.length) {
+          done()
+        }
+      })
+
+      let numChars = text.length
+      while (numChars--) {
+        vm.typeStep()
+      }
+    })
+
     it('should emit \'typed\' event after a word is typed', function(done) {
       vm.$on('typed', (word) => {
         expect(word).to.equal(text)
