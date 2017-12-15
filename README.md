@@ -29,6 +29,7 @@
   - [caretAnimation](#caretanimation)
 - [Events](#events)
   - [typed](#typed)
+  - [typed-char](#typed-char)
   - [erased](#erased)
   - [completed](#completed)
 - [Styles](#styles)
@@ -439,8 +440,8 @@ The following is a skeleton selector structure to override the style of each com
 Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
 
 ## TODO
-- Update to webpack 3
-- Update to Bootstrap v4 (for demo app)
+- Update to latest webpack
+- Remove Bootstrap usage in demo app
 - Consider marking lodash.split as a webpack external (webpack-node-externals may be overkill?)
 - Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (pull requests are welcome!):
