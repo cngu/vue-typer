@@ -206,13 +206,6 @@ export default {
       return this.currentTextArray.length
     },
 
-    lastTypedChar() {
-      if (this.previousTextIndex >= 0 && this.previousTextIndex < this.currentTextArray.length) {
-        return this.currentTextArray[this.previousTextIndex]
-      }
-      return ''
-    },
-
     numLeftChars() {
       return this.currentTextIndex < 0 ? 0 : this.currentTextIndex
     },
@@ -289,7 +282,10 @@ export default {
     typeStep() {
       if (!this.isDoneTyping) {
         this.shiftCaret(1)
-        this.$emit('typed-char', this.lastTypedChar)
+
+        const typedCharIndex = this.previousTextIndex
+        const typedChar = this.currentTextArray[typedCharIndex]
+        this.$emit('typed-char', typedChar, typedCharIndex)
       }
 
       if (this.isDoneTyping) {
