@@ -140,14 +140,16 @@ export default {
     return {
       state: STATE.IDLE,
       nextState: null,
-      repeatCounter: 0,
-      actionTimeout: 0,
-      actionInterval: 0,
 
       spool: [],
       spoolIndex: -1,
       previousTextIndex: -1,
-      currentTextIndex: -1
+      currentTextIndex: -1,
+
+      repeatCounter: 0,
+
+      actionTimeout: 0,
+      actionInterval: 0
     }
   },
 
