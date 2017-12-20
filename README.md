@@ -400,10 +400,17 @@ The following is a skeleton selector structure to override the style of each com
       /* Styles for the caret
          e.g. background-color, animation, display */
 
+      &.pre-type {
+        /* Styles for the caret when it is idle before typing
+           i.e. before a string starts being typed, during 'preTypeDelay' */
+      }
+      &.pre-erase {
+        /* Styles for the caret when it is idle before erasing
+           i.e. before a string starts being erased, during 'preEraseDelay' */
+      }
       &.idle {
-        /* Styles for the caret when it is idle (but VueTyper has not yet completed)
-           i.e. before a string starts being typed (during 'preTypeDelay') and
-                before a string starts being erased (during 'preEraseDelay') */
+        /* Styles for the caret when it is idle, but VueTyper has not yet completed typing
+           i.e. when 'pre-type' or 'pre-erase' is set, but not 'complete' */
       }
       &.typing {
         /* Styles for the caret while VueTyper is typing
@@ -442,7 +449,7 @@ Changes for each release will be documented [here](https://github.com/cngu/vue-t
 ## TODO
 - Update to latest webpack
 - Remove Bootstrap usage in demo app
-- Consider marking lodash.split as a webpack external (webpack-node-externals may be overkill?)
+- Consider marking lodash.split as a peer dependency via webpack externals (webpack-node-externals may be overkill?)
 - Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (pull requests are welcome!):
   - start typing only when VueTyper is on-screen; potentially pause typing when off-screen
