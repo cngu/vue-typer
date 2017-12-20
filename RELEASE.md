@@ -8,7 +8,7 @@ npm run clean
 2. Create RC commit on `develop` with new version number:
 ```bash
 git add package.json
-git commit -m "RC MAJOR.MINOR.PATCH [- optional message]"
+git commit -m "RC MAJOR.MINOR.PATCH[ - optional message]"
 git push
 ```
 
