@@ -1,5 +1,5 @@
 /*!
- * vue-typer v1.1.0
+ * vue-typer v1.2.0
  * Copyright 2016-2017 Chris Nguyen
  * Released under the MIT license.
  */
@@ -909,22 +909,28 @@ exports.default = {
   data: function data() {
     return {
       state: STATE.IDLE,
-      repeatCounter: 0,
-      actionTimeout: 0,
-      actionInterval: 0,
+      nextState: null,
 
       spool: [],
       spoolIndex: -1,
       previousTextIndex: -1,
-      currentTextIndex: -1
+      currentTextIndex: -1,
+
+      repeatCounter: 0,
+
+      actionTimeout: 0,
+      actionInterval: 0
     };
   },
 
 
   computed: {
     caretClasses: function caretClasses() {
+      var idle = this.state === STATE.IDLE;
       return {
-        idle: this.state === STATE.IDLE,
+        idle: idle,
+        'pre-type': idle && this.nextState === STATE.TYPING,
+        'pre-erase': idle && this.nextState === STATE.ERASING,
         typing: this.state === STATE.TYPING,
         selecting: this.state === STATE.ERASING && this.isSelectionBasedEraseStyle,
         erasing: this.state === STATE.ERASING && !this.isSelectionBasedEraseStyle,
@@ -1081,6 +1087,7 @@ exports.default = {
       this.moveCaretToStart();
 
       this.state = STATE.IDLE;
+      this.nextState = STATE.TYPING;
       this.actionTimeout = setTimeout(function () {
         _this.state = STATE.TYPING;
         _this.typeStep();
@@ -1099,6 +1106,7 @@ exports.default = {
       this.moveCaretToEnd();
 
       this.state = STATE.IDLE;
+      this.nextState = STATE.ERASING;
       this.actionTimeout = setTimeout(function () {
         _this2.state = STATE.ERASING;
         _this2.eraseStep();
@@ -1138,6 +1146,7 @@ exports.default = {
     },
     onComplete: function onComplete() {
       this.state = STATE.COMPLETE;
+      this.nextState = null;
       this.$emit('completed');
     }
   },
