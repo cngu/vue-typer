@@ -30,7 +30,7 @@ export default {
 }
 
 /* TODO: This can be removed in favor of the ':blank' pseudo-class:
-   https://drafts.csswg.org/selectors-4/#the-blank-pseudo */
+         https://drafts.csswg.org/selectors-4/#the-blank-pseudo */
 .newline {
   display: inline;
 }

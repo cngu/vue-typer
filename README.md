@@ -29,6 +29,7 @@
   - [caretAnimation](#caretanimation)
 - [Events](#events)
   - [typed](#typed)
+  - [typed-char](#typed-char)
   - [erased](#erased)
   - [completed](#completed)
 - [Styles](#styles)
@@ -298,6 +299,31 @@ It may be helpful to play around with these props in the [interactive demo](http
 
   Emitted everytime VueTyper finishes typing a string.
 
+#### `typed-char`
+- **Event data**:
+  - `String` typedChar
+  - `Number` typedCharIndex
+- **Usage**:
+  ```html
+  <vue-typer text='watermelon' @typed-char='onTypedChar'></vue-typer>
+  ```
+  ```javascript
+  {
+    ...
+    methods: {
+      onTypedChar: function(typedChar, typedCharIndex) {
+        // handle typed character at the given index
+        // call #1: 'w', 0
+        // call #2: 'a', 1
+        // call #3: 't', 2
+        // ...
+      }
+    }
+  }
+  ```
+
+  Emitted everytime VueTyper finishes typing a single character.
+
 #### `erased`
 - **Event data**:
   - `String` erasedString
@@ -421,9 +447,9 @@ The following is a skeleton selector structure to override the style of each com
 Changes for each release will be documented [here](https://github.com/cngu/vue-typer/releases).
 
 ## TODO
-- Update to webpack 3
-- Update to Bootstrap v4 (for demo app)
-- Consider marking lodash.split as a webpack external (webpack-node-externals may be overkill?)
+- Update to latest webpack
+- Remove Bootstrap usage in demo app
+- Consider marking lodash.split as a peer dependency via webpack externals (webpack-node-externals may be overkill?)
 - Revisit community discussions around the best way to obtain deterministic hashes so we can remove HashedModuleIdsPlugin
 - Potential features (pull requests are welcome!):
   - start typing only when VueTyper is on-screen; potentially pause typing when off-screen
