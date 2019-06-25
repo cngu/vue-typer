@@ -5,7 +5,8 @@
   "main": "dist/vue-typer.min.js",
   "files": [
     "dist/vue-typer.js",
-    "dist/vue-typer.min.js"
+    "dist/vue-typer.min.js",
+    "nuxt"
   ],
   "scripts": {
     "dev": "NODE_ENV='development' webpack-dev-server --config build/webpack.config.dev.js --hot --inline --open --compress",

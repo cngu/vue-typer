@@ -59,6 +59,18 @@ Use this method if you wish to access VueTyper globally via `window.VueTyper`.
 <script src="https://unpkg.com/vue-typer/dist/vue-typer.min.js"></script>
 ```
 
+## Nuxt.js
+
+Add `vue-typer/nuxt` to modules section of `nuxt.config.js`
+
+```js
+{
+  modules: [
+    'vue-typer/nuxt'
+  ]
+}
+```
+
 ## Usage
 After installing VueTyper, you may choose to register it either globally or locally. [What's the difference? See the Vue documentation here.](https://vuejs.org/v2/guide/components.html#Registration)
 
