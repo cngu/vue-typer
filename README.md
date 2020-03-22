@@ -434,6 +434,17 @@ The following is a skeleton selector structure to override the style of each com
   ```
 
 - **Note**: Some of the default styles above make things hidden using `display: none;`. If you wish to make it visible again, use `display: inline-block;`. Do not use `block`.
+
+- When using vue-typer with scoped css make sure to add /deep/ before the style name. e.g 
+```css
+
+/deep/ .vue-typer {
+    /* Styles for the vue-typer container
+       e.g. font-family, font-size  */
+       }
+
+```
+
 - **See also**: [CSS Examples](https://cngu.github.io/vue-typer#style-showcase)
 
 ## Contribution Guide
